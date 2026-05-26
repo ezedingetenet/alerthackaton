@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style/style.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        </style>
+    </head>
+
+    <body>
+
+    <div class = "header">
+
+        <div class = "logo"> Logo</div>
+
+        <div class = "homeNavbar">
+            <a class= "nav-link" href="index.html">Home</a>
+            <a  class="nav-link active" href="about.html">About</a>
+            <a  class="nav-link" href="program.html">Programme</a>
+            <a  class="nav-link" href="speakers.html">Speakers</a>
+            <a class="nav-link" href="register.html">Register</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+
+        </div>
+
+        <div class = "registerbutton" id="register-btn">
+            <button>Register</button>
+        </div>
+
+    </div>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(Link=>{
+            Link.addEventListener('click', (e)=>{
+                 navLinks.forEach(l => l.classList.remove('active'));
+
+                Link.classList.add('active');
+            })
+        });
+    </script>
+
+    <div class="about-content">
+
+        <!-- About the Forum Section -->
+        <section class="about-forum-section">
+            <h2>About the Forum</h2>
+
+            <p>The Digital Health & Innovation Forum is Ethiopia's premier gathering for healthcare transformation. We bring together three distinct communities — healthcare professionals, technology innovators, and industry leaders — to collaborate on solutions that matter.</p>
+
+            <p>This is not just another conference. It's a platform for authentic dialogue, practical innovation, and meaningful partnerships that drive real change in healthcare delivery.</p>
+
+            <p>Whether you're a doctor exploring digital tools, a startup building health tech solutions, or an industry partner seeking collaboration opportunities, the forum provides the space and connections you need.</p>
+        </section>
+
+        <!-- Core Values Section -->
+        <section class="core-values-section">
+            <h2>Our Core Values</h2>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">👥</div>
+                    <h3>Connect</h3>
+                    <p>Build meaningful relationships with healthcare professionals, innovators, and industry leaders.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">🏢</div>
+                    <h3>Build</h3>
+                    <p>Collaborate on solutions that address real healthcare challenges in Ethiopia and beyond.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">💡</div>
+                    <h3>Innovate</h3>
+                    <p>Explore cutting-edge technologies and approaches transforming healthcare delivery.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Alert Hospital Section -->
+        <section class="alert-hospital-section">
+            <h2>About Alert Hospital</h2>
+
+            <p>Alert Hospital is more than just our venue — it's a symbol of what we're building together. As a leading healthcare institution in Addis Ababa, Alert Hospital embodies the intersection of quality care and innovation that defines our forum.</p>
+
+            <div class="hospital-features">
+                <div class="feature-card">
+                    <h3>Authenticity</h3>
+                    <p>Discussions happen in a real healthcare environment, not a generic conference center.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Space & Facilities</h3>
+                    <p>Modern conference facilities, exhibition halls, and networking spaces designed for collaboration.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Inspiration</h3>
+                    <p>Being surrounded by active healthcare delivery inspires practical, implementable solutions.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    </body>
+</html>

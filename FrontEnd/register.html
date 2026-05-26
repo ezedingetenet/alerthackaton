@@ -1,0 +1,471 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="logo"><a href="index.html" style="text-decoration: none; color: black;">Logo</a></div>
+      <div class="homeNavbar">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="#">Programme</a>
+        <a class="nav-link" href="#">Speakers</a>
+        <a class="nav-link active" href="register.html">Register</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </div>
+      <div class="registerbutton" id="register-btn">
+        <button id="admin-login-btn" style="background-color: #666; margin-right: 10px;">Admin Login</button>
+      </div>
+    </div>
+
+    <div class="register-container">
+      <div class="register-card">
+        <h1>Forum Registration</h1>
+        <p class="subtitle">Choose your participation type</p>
+
+        <!-- Step 1: Registration Type -->
+        <div class="form-step" id="step-1">
+          <h3>Step 1: Select Your Role</h3>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="registration_type" value="healthcare_professional"> Healthcare Professional
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="registration_type" value="exhibitor_industry"> Exhibitor & Industry
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="registration_type" value="hackathon_innovator"> Hackathon Innovator
+            </label>
+          </div>
+          <button class="btn-next" onclick="nextStep(1)">Next</button>
+        </div>
+
+        <!-- Step 2: Participation Type -->
+        <div class="form-step hidden" id="step-2">
+          <h3>Step 2: Participation Type</h3>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="participation" value="solo"> Solo Registration
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="participation" value="team"> Team Registration
+            </label>
+          </div>
+          <div id="team-name-container" class="hidden">
+            <input type="text" id="team_name" placeholder="Team Name" class="form-input">
+          </div>
+          <button class="btn-prev" onclick="prevStep(2)">Back</button>
+          <button class="btn-next" onclick="nextStep(2)">Next</button>
+        </div>
+
+        <!-- Step 3: Personal & Team Details -->
+        <div class="form-step hidden" id="step-3">
+          <h3>Step 3: Your Details</h3>
+          <input type="email" id="email" placeholder="Email Address" class="form-input" required>
+          <input type="password" id="password" placeholder="Password" class="form-input" required>
+          <input type="text" id="full_name" placeholder="Full Name" class="form-input" required>
+          <input type="tel" id="phone" placeholder="Phone Number" class="form-input">
+
+          <div id="team-members-container" class="hidden">
+            <h4>Add Team Members</h4>
+            <div id="team-members-list"></div>
+            <button type="button" class="btn-add-member" onclick="addTeamMemberField()">+ Add Team Member</button>
+          </div>
+
+          <button class="btn-prev" onclick="prevStep(3)">Back</button>
+          <button class="btn-submit" onclick="submitRegistration()">Submit Registration</button>
+        </div>
+
+        <div id="success-message" class="hidden">
+          <h2>✓ Registration Successful!</h2>
+          <p>You have been registered. You can now log in.</p>
+          <a href="index.html" class="btn-home">Back to Home</a>
+        </div>
+
+        <div id="error-message" class="hidden error-box"></div>
+      </div>
+    </div>
+
+    <style>
+      .register-container {
+        background-color: rgb(240, 240, 240);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .register-card {
+        background: white;
+        padding: 3rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+      }
+
+      .register-card h1 {
+        color: #1a5a9e;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 2rem;
+      }
+
+      .form-step {
+        display: block;
+      }
+
+      .form-step.hidden {
+        display: none;
+      }
+
+      .form-step h3 {
+        color: #1a5a9e;
+        margin-bottom: 1.5rem;
+      }
+
+      .radio-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .radio-label {
+        display: block;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .radio-label:hover {
+        background-color: #f5f5f5;
+      }
+
+      .radio-label input[type="radio"] {
+        margin-right: 0.75rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 1rem;
+        box-sizing: border-box;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #1a5a9e;
+        box-shadow: 0 0 5px rgba(26, 90, 158, 0.1);
+      }
+
+      .btn-next,
+      .btn-prev,
+      .btn-submit,
+      .btn-add-member,
+      .btn-home {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-next,
+      .btn-submit,
+      .btn-add-member,
+      .btn-home {
+        background-color: #1a5a9e;
+        color: white;
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      .btn-next:hover,
+      .btn-submit:hover,
+      .btn-add-member:hover,
+      .btn-home:hover {
+        background-color: #1a4a7e;
+      }
+
+      .btn-prev {
+        background-color: #ddd;
+        color: #333;
+        margin-right: 1rem;
+        width: auto;
+        display: inline-block;
+      }
+
+      .btn-prev:hover {
+        background-color: #ccc;
+      }
+
+      .btn-add-member {
+        width: auto;
+        display: inline-block;
+        margin-top: 0.5rem;
+      }
+
+      #team-name-container.hidden,
+      #team-members-container.hidden {
+        display: none;
+      }
+
+      #team-members-list {
+        margin-bottom: 1rem;
+      }
+
+      .team-member-input {
+        background-color: #f9f9f9;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+      }
+
+      .team-member-input input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        box-sizing: border-box;
+      }
+
+      .btn-remove-member {
+        background-color: #e74c3c;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .btn-remove-member:hover {
+        background-color: #c0392b;
+      }
+
+      .error-box {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 1rem;
+        border-radius: 4px;
+        margin-top: 1rem;
+      }
+
+      .error-box.hidden {
+        display: none;
+      }
+
+      #success-message {
+        text-align: center;
+      }
+
+      #success-message h2 {
+        color: #27ae60;
+      }
+
+      #success-message.hidden {
+        display: none;
+      }
+    </style>
+
+    <script>
+      const API_URL = 'http://localhost:3000/api';
+
+      let currentStep = 1;
+      let formData = {
+        registration_type: '',
+        participation: '',
+        team_name: '',
+        team_members: [],
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // Show/hide team name input
+        const participationRadios = document.querySelectorAll('input[name="participation"]');
+        participationRadios.forEach(radio => {
+          radio.addEventListener('change', () => {
+            const container = document.getElementById('team-name-container');
+            const membersContainer = document.getElementById('team-members-container');
+            if (radio.value === 'team') {
+              container.classList.remove('hidden');
+              membersContainer.classList.remove('hidden');
+            } else {
+              container.classList.add('hidden');
+              membersContainer.classList.add('hidden');
+              document.getElementById('team-members-list').innerHTML = '';
+            }
+          });
+        });
+
+        document.getElementById('admin-login-btn').addEventListener('click', () => {
+          window.location.href = 'admin/login.html';
+        });
+      });
+
+      function nextStep(step) {
+        if (step === 1) {
+          const selected = document.querySelector('input[name="registration_type"]:checked');
+          if (!selected) {
+            showError('Please select a registration type');
+            return;
+          }
+          formData.registration_type = selected.value;
+        } else if (step === 2) {
+          const selected = document.querySelector('input[name="participation"]:checked');
+          if (!selected) {
+            showError('Please select participation type');
+            return;
+          }
+          formData.participation = selected.value;
+          if (selected.value === 'team') {
+            const teamName = document.getElementById('team_name').value.trim();
+            if (!teamName) {
+              showError('Please enter team name');
+              return;
+            }
+            formData.team_name = teamName;
+          }
+        } else if (step === 3) {
+          const email = document.getElementById('email').value.trim();
+          const password = document.getElementById('password').value.trim();
+          const fullName = document.getElementById('full_name').value.trim();
+
+          if (!email || !password || !fullName) {
+            showError('Email, password, and full name are required');
+            return;
+          }
+        }
+
+        clearError();
+        currentStep = step + 1;
+        showStep(currentStep);
+      }
+
+      function prevStep(step) {
+        clearError();
+        currentStep = step - 1;
+        showStep(currentStep);
+      }
+
+      function showStep(step) {
+        document.querySelectorAll('.form-step').forEach(el => el.classList.add('hidden'));
+        document.getElementById('step-' + step).classList.remove('hidden');
+      }
+
+      function addTeamMemberField() {
+        const container = document.getElementById('team-members-list');
+        const index = container.children.length;
+        const memberHtml = `
+          <div class="team-member-input">
+            <input type="text" placeholder="Full Name" class="member-full-name" data-index="${index}">
+            <input type="email" placeholder="Email" class="member-email" data-index="${index}">
+            <input type="text" placeholder="Role (e.g., Developer)" class="member-role" data-index="${index}">
+            <button type="button" class="btn-remove-member" onclick="removeTeamMember(${index})">Remove</button>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', memberHtml);
+      }
+
+      function removeTeamMember(index) {
+        const container = document.getElementById('team-members-list');
+        container.children[index].remove();
+      }
+
+      async function submitRegistration() {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const fullName = document.getElementById('full_name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+
+        if (!email || !password || !fullName) {
+          showError('Email, password, and full name are required');
+          return;
+        }
+
+        try {
+          // Register user account
+          const registerRes = await fetch(`${API_URL}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, full_name: fullName, phone }),
+          });
+
+          if (!registerRes.ok) {
+            const data = await registerRes.json();
+            throw new Error(data.error || 'Registration failed');
+          }
+
+          const { token } = await registerRes.json();
+          localStorage.setItem('token', token);
+
+          // Submit registration
+          const teamMembers = [];
+          document.querySelectorAll('.member-full-name').forEach((field, idx) => {
+            const fullName = field.value.trim();
+            const email = document.querySelectorAll('.member-email')[idx].value.trim();
+            const role = document.querySelectorAll('.member-role')[idx].value.trim();
+            if (fullName && email) {
+              teamMembers.push({ full_name: fullName, email, member_role: role });
+            }
+          });
+
+          const registrationRes = await fetch(`${API_URL}/registrations`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              registration_type: formData.registration_type,
+              participation: formData.participation,
+              team_name: formData.team_name,
+              team_members: teamMembers,
+            }),
+          });
+
+          if (!registrationRes.ok) {
+            const data = await registrationRes.json();
+            throw new Error(data.error || 'Registration submission failed');
+          }
+
+          clearError();
+          document.querySelectorAll('.form-step').forEach(el => el.classList.add('hidden'));
+          document.getElementById('success-message').classList.remove('hidden');
+        } catch (err) {
+          showError(err.message);
+        }
+      }
+
+      function showError(message) {
+        const errorBox = document.getElementById('error-message');
+        errorBox.textContent = message;
+        errorBox.classList.remove('hidden');
+      }
+
+      function clearError() {
+        const errorBox = document.getElementById('error-message');
+        errorBox.classList.add('hidden');
+      }
+    </script>
+  </body>
+</html>

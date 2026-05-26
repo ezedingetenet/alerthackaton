@@ -1,0 +1,277 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../style/style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      }
+
+      .admin-header {
+        background-color: #1a5a9e;
+        color: white;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .admin-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .admin-header button {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .admin-header button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .admin-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 60px;
+        width: 250px;
+        height: calc(100vh - 60px);
+        background-color: white;
+        border-right: 1px solid #ddd;
+        overflow-y: auto;
+      }
+
+      .sidebar a {
+        display: block;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color: #333;
+        border-left: 3px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar a:hover,
+      .sidebar a.active {
+        background-color: #f0f0f0;
+        border-left-color: #1a5a9e;
+        color: #1a5a9e;
+        font-weight: 600;
+      }
+
+      .main-content {
+        margin-left: 250px;
+        margin-top: 2rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-card h3 {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+      }
+
+      .stat-card .value {
+        font-size: 2.5rem;
+        color: #1a5a9e;
+        font-weight: 700;
+      }
+
+      .stat-card p {
+        color: #999;
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+      }
+
+      .chart-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      .chart-card h3 {
+        color: #1a5a9e;
+        margin-bottom: 1.5rem;
+      }
+
+      .chart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .chart-item:last-child {
+        border-bottom: none;
+      }
+
+      .chart-item-label {
+        flex: 1;
+        color: #333;
+      }
+
+      .chart-item-value {
+        color: #1a5a9e;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="admin-header">
+      <h1>Admin Dashboard</h1>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="sidebar">
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="registrations.html">Registrations</a>
+      <a href="exhibitors.html">Exhibitors</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="tickets.html">Support Tickets</a>
+    </div>
+
+    <div class="main-content">
+      <div class="admin-container">
+        <h2 style="color: #333; margin-bottom: 2rem;">Welcome, Admin!</h2>
+
+        <div class="stats-grid" id="stats-grid">
+          <p style="text-align: center; color: #999;">Loading statistics...</p>
+        </div>
+
+        <div class="chart-card">
+          <h3>Registrations by Type</h3>
+          <div id="reg-by-type"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Registration Status</h3>
+          <div id="reg-by-status"></div>
+        </div>
+
+        <div class="chart-card">
+          <h3>Support Tickets Status</h3>
+          <div id="tickets-by-status"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API_URL = 'http://localhost:3000/api';
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+        loadStats();
+      });
+
+      async function loadStats() {
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/admin/stats`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+          });
+
+          if (!res.ok) throw new Error('Failed to load stats');
+
+          const stats = await res.json();
+
+          // Main stats
+          const statsGrid = document.getElementById('stats-grid');
+          statsGrid.innerHTML = `
+            <div class="stat-card">
+              <h3>Total Registrations</h3>
+              <div class="value">${stats.registrations.total}</div>
+            </div>
+            <div class="stat-card">
+              <h3>Exhibitor Applications</h3>
+              <div class="value">${stats.exhibitors.total}</div>
+            </div>
+            <div class="stat-card">
+              <h3>Support Tickets</h3>
+              <div class="value">${stats.tickets.total}</div>
+            </div>
+            <div class="stat-card">
+              <h3>Pending Approvals</h3>
+              <div class="value">${stats.registrations.byStatus.find(s => s.status === 'pending')?.count || 0}</div>
+            </div>
+          `;
+
+          // Registrations by type
+          const regByType = document.getElementById('reg-by-type');
+          regByType.innerHTML = stats.registrations.byType.map(item => `
+            <div class="chart-item">
+              <span class="chart-item-label">${item.registration_type}</span>
+              <span class="chart-item-value">${item.count}</span>
+            </div>
+          `).join('');
+
+          // Registrations by status
+          const regByStatus = document.getElementById('reg-by-status');
+          regByStatus.innerHTML = stats.registrations.byStatus.map(item => `
+            <div class="chart-item">
+              <span class="chart-item-label">${item.status}</span>
+              <span class="chart-item-value">${item.count}</span>
+            </div>
+          `).join('');
+
+          // Tickets by status
+          const ticketsByStatus = document.getElementById('tickets-by-status');
+          ticketsByStatus.innerHTML = stats.tickets.byStatus.map(item => `
+            <div class="chart-item">
+              <span class="chart-item-label">${item.status}</span>
+              <span class="chart-item-value">${item.count}</span>
+            </div>
+          `).join('');
+        } catch (err) {
+          console.error(err);
+          alert('Failed to load statistics');
+        }
+      }
+
+      function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = 'login.html';
+      }
+    </script>
+  </body>
+</html>

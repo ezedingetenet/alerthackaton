@@ -1,0 +1,389 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../style/style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      }
+
+      .admin-header {
+        background-color: #1a5a9e;
+        color: white;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .admin-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .admin-header button {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .admin-header button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 60px;
+        width: 250px;
+        height: calc(100vh - 60px);
+        background-color: white;
+        border-right: 1px solid #ddd;
+        overflow-y: auto;
+      }
+
+      .sidebar a {
+        display: block;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color: #333;
+        border-left: 3px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar a:hover,
+      .sidebar a.active {
+        background-color: #f0f0f0;
+        border-left-color: #1a5a9e;
+        color: #1a5a9e;
+        font-weight: 600;
+      }
+
+      .main-content {
+        margin-left: 250px;
+        margin-top: 2rem;
+        padding: 0 2rem 2rem 2rem;
+      }
+
+      .admin-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .add-item-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .form-row.full {
+        grid-template-columns: 1fr;
+      }
+
+      input, select, textarea {
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 1rem;
+      }
+
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #1a5a9e;
+        box-shadow: 0 0 5px rgba(26, 90, 158, 0.1);
+      }
+
+      .btn-add {
+        padding: 0.75rem 1.5rem;
+        background-color: #1a5a9e;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+
+      .btn-add:hover {
+        background-color: #1a4a7e;
+      }
+
+      .schedule-item {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .schedule-item-info {
+        flex: 1;
+      }
+
+      .schedule-item-info h4 {
+        color: #1a5a9e;
+        margin-bottom: 0.5rem;
+      }
+
+      .schedule-item-info p {
+        color: #666;
+        font-size: 0.9rem;
+        margin: 0.25rem 0;
+      }
+
+      .schedule-item-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .btn-edit,
+      .btn-delete {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .btn-edit {
+        background-color: #3498db;
+        color: white;
+      }
+
+      .btn-edit:hover {
+        background-color: #2980b9;
+      }
+
+      .btn-delete {
+        background-color: #e74c3c;
+        color: white;
+      }
+
+      .btn-delete:hover {
+        background-color: #c0392b;
+      }
+
+      .day-section {
+        margin-bottom: 3rem;
+      }
+
+      .day-section h3 {
+        color: #333;
+        margin: 2rem 0 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #1a5a9e;
+      }
+
+      .empty-message {
+        text-align: center;
+        padding: 2rem;
+        color: #999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="admin-header">
+      <h1>Manage Schedule</h1>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="sidebar">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="registrations.html">Registrations</a>
+      <a href="exhibitors.html">Exhibitors</a>
+      <a href="schedule.html" class="active">Schedule</a>
+      <a href="tickets.html">Support Tickets</a>
+    </div>
+
+    <div class="main-content">
+      <div class="admin-container">
+        <h2 style="color: #333; margin-bottom: 2rem;">Event Schedule Management</h2>
+
+        <div class="add-item-form">
+          <h3>Add New Schedule Item</h3>
+          <div class="form-row">
+            <select id="day" style="width: 100%;">
+              <option value="">Select Day</option>
+              <option value="1">Day 1 (July 3)</option>
+              <option value="2">Day 2 (July 4)</option>
+              <option value="3">Day 3 (July 5)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <input type="time" id="start_time" placeholder="Start Time">
+            <input type="time" id="end_time" placeholder="End Time">
+          </div>
+          <div class="form-row full">
+            <input type="text" id="title" placeholder="Event Title" style="width: 100%;">
+          </div>
+          <div class="form-row full">
+            <textarea id="description" placeholder="Description (optional)" style="width: 100%; height: 100px;"></textarea>
+          </div>
+          <button class="btn-add" onclick="addItem()">Add Schedule Item</button>
+        </div>
+
+        <div id="schedule-list"></div>
+      </div>
+    </div>
+
+    <script>
+      const API_URL = 'http://localhost:3000/api';
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+        loadSchedule();
+      });
+
+      async function loadSchedule() {
+        try {
+          const res = await fetch(`${API_URL}/schedule`);
+          if (!res.ok) throw new Error('Failed to load schedule');
+
+          const items = await res.json();
+          renderSchedule(items);
+        } catch (err) {
+          console.error(err);
+          alert('Failed to load schedule');
+        }
+      }
+
+      function renderSchedule(items) {
+        const list = document.getElementById('schedule-list');
+
+        if (items.length === 0) {
+          list.innerHTML = '<div class="empty-message">No schedule items yet</div>';
+          return;
+        }
+
+        const groupedByDay = {
+          1: [],
+          2: [],
+          3: [],
+        };
+
+        items.forEach(item => {
+          groupedByDay[item.day] = groupedByDay[item.day] || [];
+          groupedByDay[item.day].push(item);
+        });
+
+        list.innerHTML = '';
+
+        [1, 2, 3].forEach(day => {
+          const dayItems = groupedByDay[day];
+          const dayNames = ['', 'Day 1 (July 3)', 'Day 2 (July 4)', 'Day 3 (July 5)'];
+
+          list.insertAdjacentHTML('beforeend', `<div class="day-section"><h3>${dayNames[day]}</h3></div>`);
+
+          if (dayItems && dayItems.length > 0) {
+            dayItems.forEach(item => {
+              list.insertAdjacentHTML('beforeend', `
+                <div class="schedule-item">
+                  <div class="schedule-item-info">
+                    <h4>${item.title}</h4>
+                    <p><strong>${item.start_time} - ${item.end_time}</strong></p>
+                    ${item.description ? `<p>${item.description}</p>` : ''}
+                  </div>
+                  <div class="schedule-item-actions">
+                    <button class="btn-delete" onclick="deleteItem('${item.id}')">Delete</button>
+                  </div>
+                </div>
+              `);
+            });
+          }
+        });
+      }
+
+      async function addItem() {
+        const day = document.getElementById('day').value;
+        const start_time = document.getElementById('start_time').value;
+        const end_time = document.getElementById('end_time').value;
+        const title = document.getElementById('title').value.trim();
+        const description = document.getElementById('description').value.trim();
+
+        if (!day || !start_time || !end_time || !title) {
+          alert('Please fill in all required fields');
+          return;
+        }
+
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/schedule`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ day, start_time, end_time, title, description }),
+          });
+
+          if (!res.ok) throw new Error('Failed to add item');
+
+          document.getElementById('day').value = '';
+          document.getElementById('start_time').value = '';
+          document.getElementById('end_time').value = '';
+          document.getElementById('title').value = '';
+          document.getElementById('description').value = '';
+
+          loadSchedule();
+        } catch (err) {
+          alert('Error: ' + err.message);
+        }
+      }
+
+      async function deleteItem(id) {
+        if (!confirm('Are you sure?')) return;
+
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/schedule/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` },
+          });
+
+          if (!res.ok) throw new Error('Failed to delete');
+
+          loadSchedule();
+        } catch (err) {
+          alert('Error: ' + err.message);
+        }
+      }
+
+      function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = 'login.html';
+      }
+    </script>
+  </body>
+</html>

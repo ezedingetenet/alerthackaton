@@ -1,0 +1,325 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../style/style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      }
+
+      .admin-header {
+        background-color: #1a5a9e;
+        color: white;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .admin-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .admin-header button {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .admin-header button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 60px;
+        width: 250px;
+        height: calc(100vh - 60px);
+        background-color: white;
+        border-right: 1px solid #ddd;
+        overflow-y: auto;
+      }
+
+      .sidebar a {
+        display: block;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color: #333;
+        border-left: 3px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar a:hover,
+      .sidebar a.active {
+        background-color: #f0f0f0;
+        border-left-color: #1a5a9e;
+        color: #1a5a9e;
+        font-weight: 600;
+      }
+
+      .main-content {
+        margin-left: 250px;
+        margin-top: 2rem;
+        padding: 0 2rem 2rem 2rem;
+      }
+
+      .admin-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .exhibitor-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+      }
+
+      .exhibitor-card h3 {
+        color: #1a5a9e;
+        margin-bottom: 0.5rem;
+      }
+
+      .exhibitor-card p {
+        color: #666;
+        margin: 0.25rem 0;
+        font-size: 0.95rem;
+      }
+
+      .exhibitor-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .status-pending {
+        background-color: #fff3e0;
+        color: #f57c00;
+      }
+
+      .status-approved {
+        background-color: #e8f5e9;
+        color: #27ae60;
+      }
+
+      .status-rejected {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .action-btns {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .action-btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .btn-approve {
+        background-color: #27ae60;
+        color: white;
+      }
+
+      .btn-approve:hover {
+        background-color: #229954;
+      }
+
+      .btn-reject {
+        background-color: #e74c3c;
+        color: white;
+      }
+
+      .btn-reject:hover {
+        background-color: #c0392b;
+      }
+
+      .filters {
+        margin-bottom: 2rem;
+      }
+
+      .filter-btn {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ddd;
+        background: white;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        margin-right: 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .filter-btn.active {
+        background-color: #1a5a9e;
+        color: white;
+        border-color: #1a5a9e;
+      }
+
+      .empty-message {
+        text-align: center;
+        padding: 2rem;
+        color: #999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="admin-header">
+      <h1>Manage Exhibitors</h1>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="sidebar">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="registrations.html">Registrations</a>
+      <a href="exhibitors.html" class="active">Exhibitors</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="tickets.html">Support Tickets</a>
+    </div>
+
+    <div class="main-content">
+      <div class="admin-container">
+        <h2 style="color: #333; margin-bottom: 2rem;">Exhibitor Applications</h2>
+
+        <div class="filters">
+          <button class="filter-btn active" onclick="filterBy('all')">All</button>
+          <button class="filter-btn" onclick="filterBy('pending')">Pending</button>
+          <button class="filter-btn" onclick="filterBy('approved')">Approved</button>
+          <button class="filter-btn" onclick="filterBy('rejected')">Rejected</button>
+        </div>
+
+        <div id="exhibitors-list"></div>
+      </div>
+    </div>
+
+    <script>
+      const API_URL = 'http://localhost:3000/api';
+      let currentFilter = 'all';
+      let allExhibitors = [];
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+        loadExhibitors();
+      });
+
+      async function loadExhibitors() {
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/exhibitors`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+          });
+
+          if (!res.ok) throw new Error('Failed to load exhibitors');
+
+          allExhibitors = await res.json();
+          renderCards();
+        } catch (err) {
+          console.error(err);
+          alert('Failed to load exhibitors');
+        }
+      }
+
+      function filterBy(filter) {
+        currentFilter = filter;
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        renderCards();
+      }
+
+      function renderCards() {
+        let filtered = allExhibitors;
+
+        if (currentFilter !== 'all') {
+          filtered = filtered.filter(e => e.status === currentFilter);
+        }
+
+        const list = document.getElementById('exhibitors-list');
+
+        if (filtered.length === 0) {
+          list.innerHTML = '<div class="empty-message">No exhibitors found</div>';
+          return;
+        }
+
+        list.innerHTML = filtered.map(exhibitor => `
+          <div class="exhibitor-card">
+            <h3>${exhibitor.company_name}</h3>
+            <p><strong>Contact:</strong> ${exhibitor.contact_person}</p>
+            <p><strong>Email:</strong> ${exhibitor.email}</p>
+            <p><strong>Phone:</strong> ${exhibitor.phone || 'N/A'}</p>
+            <p><strong>Industry:</strong> ${exhibitor.industry_type}</p>
+            <p><strong>Description:</strong> ${exhibitor.description}</p>
+            <div class="exhibitor-info">
+              <div><strong>Status:</strong> <span class="status-badge status-${exhibitor.status}">${exhibitor.status}</span></div>
+              <div><strong>Applied:</strong> ${new Date(exhibitor.created_at).toLocaleDateString()}</div>
+            </div>
+            <div class="action-btns">
+              <button class="action-btn btn-approve" onclick="updateStatus('${exhibitor.id}', 'approved')">Approve</button>
+              <button class="action-btn btn-reject" onclick="updateStatus('${exhibitor.id}', 'rejected')">Reject</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      async function updateStatus(id, status) {
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/exhibitors/${id}/status`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ status }),
+          });
+
+          if (!res.ok) throw new Error('Failed to update status');
+
+          loadExhibitors();
+        } catch (err) {
+          alert('Error: ' + err.message);
+        }
+      }
+
+      function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = 'login.html';
+      }
+    </script>
+  </body>
+</html>

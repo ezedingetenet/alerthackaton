@@ -1,0 +1,503 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style/style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="logo"><a href="index.html" style="text-decoration: none; color: black;">Logo</a></div>
+      <div class="homeNavbar">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="#">Programme</a>
+        <a class="nav-link" href="#">Speakers</a>
+        <a class="nav-link" href="register.html">Register</a>
+        <a class="nav-link active" href="contact.html">Contact</a>
+      </div>
+      <div class="registerbutton" id="register-btn">
+        <button id="admin-login-btn" style="background-color: #666; margin-right: 10px;">Admin Login</button>
+      </div>
+    </div>
+
+    <div class="contact-container">
+      <div class="contact-card">
+        <h1>Customer Support</h1>
+        <p class="subtitle">Submit your issue or question</p>
+
+        <div id="login-required" class="hidden">
+          <p style="text-align: center; color: #666;">You need to log in to submit a support ticket.</p>
+          <button class="btn-login" onclick="goToRegister()">Register / Login</button>
+        </div>
+
+        <div id="ticket-form" class="hidden">
+          <input type="text" id="subject" placeholder="Subject" class="form-input" required>
+          <select id="category" class="form-input">
+            <option value="general">General Question</option>
+            <option value="registration">Registration Issue</option>
+            <option value="exhibitor">Exhibitor Inquiry</option>
+            <option value="technical">Technical Support</option>
+          </select>
+          <select id="priority" class="form-input">
+            <option value="medium" selected>Priority: Medium</option>
+            <option value="low">Priority: Low</option>
+            <option value="high">Priority: High</option>
+          </select>
+          <textarea id="message" placeholder="Describe your issue..." class="form-textarea" required></textarea>
+          <button class="btn-submit" onclick="submitTicket()">Submit Ticket</button>
+          <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+
+        <div id="my-tickets" class="hidden">
+          <h3>My Support Tickets</h3>
+          <div id="tickets-list" class="tickets-list"></div>
+          <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+
+        <div id="ticket-detail" class="hidden">
+          <h3 id="ticket-subject"></h3>
+          <p id="ticket-status" class="status-badge"></p>
+          <div id="messages-container" class="messages-container"></div>
+          <textarea id="reply-message" placeholder="Type your reply..." class="form-textarea"></textarea>
+          <button class="btn-submit" onclick="sendReply()">Send Reply</button>
+          <button class="btn-secondary" onclick="backToTickets()">Back to Tickets</button>
+        </div>
+
+        <div id="success-message" class="hidden">
+          <h2>✓ Ticket Submitted!</h2>
+          <p>Your support ticket has been created. We'll get back to you soon.</p>
+          <button class="btn-primary" onclick="viewMyTickets()">View My Tickets</button>
+        </div>
+
+        <div id="error-message" class="hidden error-box"></div>
+      </div>
+    </div>
+
+    <style>
+      .contact-container {
+        background-color: rgb(240, 240, 240);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .contact-card {
+        background: white;
+        padding: 3rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+      }
+
+      .contact-card h1 {
+        color: #1a5a9e;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 2rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 1rem;
+        box-sizing: border-box;
+      }
+
+      .form-textarea {
+        width: 100%;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 1rem;
+        min-height: 150px;
+        box-sizing: border-box;
+        resize: vertical;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: #1a5a9e;
+        box-shadow: 0 0 5px rgba(26, 90, 158, 0.1);
+      }
+
+      .btn-submit,
+      .btn-login,
+      .btn-primary {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        background-color: #1a5a9e;
+        color: white;
+        width: 100%;
+        margin-top: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-submit:hover,
+      .btn-login:hover,
+      .btn-primary:hover {
+        background-color: #1a4a7e;
+      }
+
+      .btn-secondary {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        background-color: #ddd;
+        color: #333;
+        width: 100%;
+        margin-top: 0.5rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-secondary:hover {
+        background-color: #ccc;
+      }
+
+      .error-box {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 1rem;
+        border-radius: 4px;
+        margin-top: 1rem;
+      }
+
+      .error-box.hidden {
+        display: none;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      #success-message {
+        text-align: center;
+      }
+
+      #success-message h2 {
+        color: #27ae60;
+      }
+
+      .tickets-list {
+        margin-bottom: 2rem;
+      }
+
+      .ticket-item {
+        background-color: #f9f9f9;
+        padding: 1rem;
+        border-left: 4px solid #1a5a9e;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .ticket-item:hover {
+        background-color: #f0f0f0;
+      }
+
+      .ticket-item h4 {
+        margin: 0 0 0.5rem 0;
+        color: #1a5a9e;
+      }
+
+      .ticket-item p {
+        margin: 0.25rem 0;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: 0.5rem;
+      }
+
+      .status-open {
+        background-color: #e3f2fd;
+        color: #1a5a9e;
+      }
+
+      .status-in_progress {
+        background-color: #fff3e0;
+        color: #f57c00;
+      }
+
+      .status-resolved {
+        background-color: #e8f5e9;
+        color: #27ae60;
+      }
+
+      .status-closed {
+        background-color: #f3e5f5;
+        color: #7b1fa2;
+      }
+
+      .messages-container {
+        background-color: #f9f9f9;
+        padding: 1rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      .message {
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        background-color: white;
+        border-left: 3px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .message.admin {
+        border-left-color: #1a5a9e;
+        background-color: #e3f2fd;
+      }
+
+      .message-header {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+      }
+
+      .message-time {
+        font-size: 0.8rem;
+        color: #999;
+      }
+
+      .message-text {
+        color: #555;
+        margin-top: 0.5rem;
+        line-height: 1.5;
+      }
+    </style>
+
+    <script>
+      const API_URL = 'http://localhost:3000/api';
+      let currentTicketId = null;
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('admin-login-btn').addEventListener('click', () => {
+          window.location.href = 'admin/login.html';
+        });
+
+        const token = localStorage.getItem('token');
+        if (token) {
+          document.getElementById('ticket-form').classList.remove('hidden');
+          loadMyTickets();
+        } else {
+          document.getElementById('login-required').classList.remove('hidden');
+        }
+      });
+
+      function goToRegister() {
+        window.location.href = 'register.html';
+      }
+
+      async function submitTicket() {
+        const subject = document.getElementById('subject').value.trim();
+        const category = document.getElementById('category').value;
+        const priority = document.getElementById('priority').value;
+        const message = document.getElementById('message').value.trim();
+
+        if (!subject || !message) {
+          showError('Subject and message are required');
+          return;
+        }
+
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/tickets`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ subject, category, priority }),
+          });
+
+          if (!res.ok) {
+            const data = await res.json();
+            throw new Error(data.error || 'Failed to submit ticket');
+          }
+
+          // Submit first message
+          const ticketData = await res.json();
+          const messageRes = await fetch(`${API_URL}/tickets/${ticketData.id}/messages`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ message }),
+          });
+
+          if (!messageRes.ok) throw new Error('Failed to add message');
+
+          document.getElementById('ticket-form').classList.add('hidden');
+          document.getElementById('success-message').classList.remove('hidden');
+          clearError();
+        } catch (err) {
+          showError(err.message);
+        }
+      }
+
+      async function loadMyTickets() {
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/tickets/mine`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+          });
+
+          if (!res.ok) throw new Error('Failed to load tickets');
+
+          const tickets = await res.json();
+          const list = document.getElementById('tickets-list');
+          list.innerHTML = '';
+
+          if (tickets.length === 0) {
+            list.innerHTML = '<p style="text-align: center; color: #999;">No support tickets yet.</p>';
+            return;
+          }
+
+          tickets.forEach(ticket => {
+            const html = `
+              <div class="ticket-item" onclick="loadTicketDetail('${ticket.id}')">
+                <h4>${ticket.subject}</h4>
+                <p>Status: <strong>${ticket.status}</strong></p>
+                <p>Created: ${new Date(ticket.created_at).toLocaleDateString()}</p>
+              </div>
+            `;
+            list.insertAdjacentHTML('beforeend', html);
+          });
+
+          document.getElementById('my-tickets').classList.remove('hidden');
+        } catch (err) {
+          showError(err.message);
+        }
+      }
+
+      async function loadTicketDetail(ticketId) {
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/tickets/${ticketId}/messages`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+          });
+
+          if (!res.ok) throw new Error('Failed to load ticket');
+
+          const { ticket, messages } = await res.json();
+          currentTicketId = ticketId;
+
+          document.getElementById('ticket-subject').textContent = ticket.subject;
+          const statusBadge = document.getElementById('ticket-status');
+          statusBadge.textContent = `Status: ${ticket.status}`;
+          statusBadge.className = `status-badge status-${ticket.status}`;
+
+          const messagesContainer = document.getElementById('messages-container');
+          messagesContainer.innerHTML = '';
+
+          messages.forEach(msg => {
+            const isAdmin = msg.is_admin_reply;
+            const html = `
+              <div class="message ${isAdmin ? 'admin' : ''}">
+                <div class="message-header">${msg.full_name} ${isAdmin ? '(Admin)' : ''}</div>
+                <div class="message-time">${new Date(msg.created_at).toLocaleString()}</div>
+                <div class="message-text">${msg.message}</div>
+              </div>
+            `;
+            messagesContainer.insertAdjacentHTML('beforeend', html);
+          });
+
+          document.getElementById('my-tickets').classList.add('hidden');
+          document.getElementById('ticket-detail').classList.remove('hidden');
+        } catch (err) {
+          showError(err.message);
+        }
+      }
+
+      async function sendReply() {
+        const message = document.getElementById('reply-message').value.trim();
+        if (!message) {
+          showError('Message cannot be empty');
+          return;
+        }
+
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/tickets/${currentTicketId}/messages`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ message }),
+          });
+
+          if (!res.ok) throw new Error('Failed to send reply');
+
+          document.getElementById('reply-message').value = '';
+          loadTicketDetail(currentTicketId);
+          clearError();
+        } catch (err) {
+          showError(err.message);
+        }
+      }
+
+      function backToTickets() {
+        document.getElementById('ticket-detail').classList.add('hidden');
+        document.getElementById('my-tickets').classList.remove('hidden');
+      }
+
+      function viewMyTickets() {
+        document.getElementById('success-message').classList.add('hidden');
+        document.getElementById('my-tickets').classList.remove('hidden');
+        loadMyTickets();
+      }
+
+      function logout() {
+        localStorage.removeItem('token');
+        location.reload();
+      }
+
+      function showError(message) {
+        const errorBox = document.getElementById('error-message');
+        errorBox.textContent = message;
+        errorBox.classList.remove('hidden');
+      }
+
+      function clearError() {
+        const errorBox = document.getElementById('error-message');
+        errorBox.classList.add('hidden');
+      }
+    </script>
+  </body>
+</html>

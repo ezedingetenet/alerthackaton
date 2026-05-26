@@ -1,0 +1,280 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style/style.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        </style>
+    </head>
+
+    <body>
+        
+    <div class = "header">
+
+        <div class = "logo"> Logo</div>
+
+        <div class = "homeNavbar">
+            <a class= "nav-link active" href="#">Home</a>
+            <a  class="nav-link" href="#">About</a>
+            <a  class="nav-link" href="program.html">Programme</a>
+            <a  class="nav-link" href="#">Speakers</a>
+            <a class="nav-link" href="register.html">Register</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+
+        </div>
+
+        <div class = "registerbutton" id="register-btn">
+            <button onclick="window.location.href='register.html'">Register</button>
+            <button id="admin-login-btn" style="background-color: #666; margin-left: 10px;" onclick="window.location.href='admin/login.html'">Admin</button>
+        </div>
+
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(Link=>{
+            Link.addEventListener('click', (e)=>{
+                 navLinks.forEach(l => l.classList.remove('active'));
+                Link.classList.add('active');
+            })
+        });
+
+        document.addEventListener('DOMContentLoaded', loadSchedule);
+
+        async function loadSchedule() {
+          try {
+            const res = await fetch(`${API_URL}/schedule`);
+            if (!res.ok) throw new Error('Failed to load schedule');
+
+            const scheduleItems = await res.json();
+            const timeline = document.getElementById('timeline-container');
+            timeline.innerHTML = '';
+
+            scheduleItems.forEach(item => {
+              const html = `
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <p class="time">${item.start_time} - ${item.end_time}</p>
+                    <p class="event">${item.title}</p>
+                  </div>
+                </div>
+              `;
+              timeline.insertAdjacentHTML('beforeend', html);
+            });
+          } catch (err) {
+            console.error('Error loading schedule:', err);
+            document.getElementById('timeline-container').innerHTML = '<p style="text-align: center; color: #e74c3c;">Unable to load schedule</p>';
+          }
+        }
+    </script>
+
+
+
+    <div class = "scrollPages">
+
+          <!-- First scroll section html about digital forum -->
+
+      <div class="forum_digital" id="digital-forum">
+
+        <h1>Digital Health & Innovation Forum</h1>
+         <p class="subtitle">Where Innovation Meets Real Solutions</p>
+    
+       <div class="location">
+        <p>📍 Alert Hospital, Addis Ababa, Ethiopia • 📅 3rd - 5th July 2025</p>
+       </div>
+    
+       <button class="exhibitor-btn">Apply as exhibitor</button>
+    
+       <div class="professionals">
+
+             <div class="professional-card">
+              <p>👥 Healthcare Professionals</p>
+            </div>
+
+            <div class="professional-card">
+            <p>🏢 Exhibitors & Industry</p>
+            </div>
+
+            <div class="professional-card">
+             <p>💡 Hackathon Innovators</p>
+            </div>
+
+
+         </div>
+        </div>
+
+
+          <!-- Second scroll section html about about forum -->
+
+        <div class = "about_forum">
+            <p>01 — ABOUT THE FORUM</p>
+
+            <h4>Where Ethiopia's Healthcare Future Gets Built</h4>
+
+            <p>The Digital Health & Innovation Forum brings together healthcare professionals, technology innovators,
+                 and industry leaders to shape the future of healthcare in Ethiopia.</p>
+
+                 <p>
+                    This is not just another conference. It's a convergence of real practitioners, real solutions, and real
+                     opportunities to transform healthcare delivery across the nation.
+                 </p>
+
+
+               <p>
+                "Innovation happens when healthcare professionals, technologists, and entrepreneurs
+                 collaborate in authentic environments. That's exactly what we're creating."
+               </p>
+        </div>
+
+
+         <!-- Thired scroll section html who attends -->
+
+         <div class = "attends_forum" id="attends-forum">
+
+            <h2>Three Communities, One Vision</h2>
+
+            <div class="communities-container">
+
+                <div class="community-card large">
+                    <div class="card-content">
+                        <div class="icon">🩺</div>
+                        <div>
+                            <h3>Healthcare Professionals</h3>
+                            <p>Doctors, nurses, administrators, and health tech enthusiasts exploring the future of digital health in Ethiopia.</p>
+                            <a href="#" class="learn-more">Learn more →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="communities-row">
+                    <div class="community-card">
+                        <div class="icon">🏢</div>
+                        <h3>Exhibitors & Industry</h3>
+                        <p>Health tech companies, medical device manufacturers, and solution providers showcasing innovations.</p>
+                        <a href="#" class="learn-more">Learn more →</a>
+                    </div>
+
+                    <div class="community-card">
+                        <div class="icon">💡</div>
+                        <h3>Hackathon Innovators</h3>
+                        <p>Developers, designers, and entrepreneurs building the next generation of healthcare solutions.</p>
+                        <a href="#" class="learn-more">Learn more →</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class = "venu_forum" id="venu-forum">
+
+            <p class="venue-label">03 — THE VENUE</p>
+            <h2>Hosted at Alert Hospital</h2>
+
+            <p class="venue-description">Alert Hospital provides the perfect setting for meaningful healthcare innovation discussions. As a leading healthcare institution in Addis Ababa, it offers an authentic environment where theory meets practice.</p>
+
+            <div class="venue-features">
+                <div class="feature">
+                    <span class="arrow">➜</span>
+                    <p>State-of-the-art conference facilities</p>
+                </div>
+                <div class="feature">
+                    <span class="arrow">➜</span>
+                    <p>Real healthcare environment for authentic discussions</p>
+                </div>
+                <div class="feature">
+                    <span class="arrow">➜</span>
+                    <p>Accessible location in Addis Ababa</p>
+                </div>
+                <div class="feature">
+                    <span class="arrow">➜</span>
+                    <p>Professional exhibition spaces</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class = "schedule" id="schedule">
+
+            <p class="schedule-label">04 — PROGRAMME</p>
+            <h2>A Day of Innovation</h2>
+
+            <div class="timeline" id="timeline-container">
+                <p style="text-align: center; color: #999;">Loading schedule...</p>
+            </div>
+
+        </div>
+
+
+
+        <div class = "partners" id="partners">
+
+            <p class="partners-label">05 — STRATEGIC PARTNERS</p>
+            <h2>Supported By</h2>
+
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/200x120?text=SURGIA" alt="Surgia Logo">
+                    </div>
+                    <p class="partner-type">STRATEGIC PARTNER</p>
+                </div>
+
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/200x120?text=ALERT+HOSPITAL" alt="Alert Hospital Logo">
+                    </div>
+                    <p class="partner-type">STRATEGIC PARTNER</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class = "footer" id="footer">
+
+            <div class="cta-section">
+                <h2>Ready to Shape Healthcare's Future?</h2>
+                <p class="cta-subtitle">Join us from 3rd - 5th July 2025</p>
+                <div class="cta-buttons">
+                    <button class="cta-btn primary">Apply as exhibitor</button>
+                    <button class="cta-btn secondary">Join the hackathon</button>
+                </div>
+            </div>
+
+            <footer class="main-footer">
+                <div class="footer-column">
+                    <h3>Digital Health & Innovation Forum</h3>
+                    <p>Where Innovation Meets Real Solutions</p>
+                    <h4>Register Options</h4>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Programme</a></li>
+                        <li><a href="#">Register</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                </div>
+            </footer>
+
+        </div>
+
+
+
+        
+
+    </div>
+
+
+    </body>
+</html>

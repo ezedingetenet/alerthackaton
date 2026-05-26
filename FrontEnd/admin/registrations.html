@@ -1,0 +1,344 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../style/style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      }
+
+      .admin-header {
+        background-color: #1a5a9e;
+        color: white;
+        padding: 1.5rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .admin-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .admin-header button {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .admin-header button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 60px;
+        width: 250px;
+        height: calc(100vh - 60px);
+        background-color: white;
+        border-right: 1px solid #ddd;
+        overflow-y: auto;
+      }
+
+      .sidebar a {
+        display: block;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color: #333;
+        border-left: 3px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar a:hover,
+      .sidebar a.active {
+        background-color: #f0f0f0;
+        border-left-color: #1a5a9e;
+        color: #1a5a9e;
+        font-weight: 600;
+      }
+
+      .main-content {
+        margin-left: 250px;
+        margin-top: 2rem;
+        padding: 0 2rem 2rem 2rem;
+      }
+
+      .admin-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .filters {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ddd;
+        background: white;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+      }
+
+      .filter-btn.active {
+        background-color: #1a5a9e;
+        color: white;
+        border-color: #1a5a9e;
+      }
+
+      .table-container {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        background-color: #f9f9f9;
+        border-bottom: 2px solid #ddd;
+      }
+
+      th {
+        padding: 1rem;
+        text-align: left;
+        color: #333;
+        font-weight: 600;
+      }
+
+      td {
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      tr:hover {
+        background-color: #f9f9f9;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .status-pending {
+        background-color: #fff3e0;
+        color: #f57c00;
+      }
+
+      .status-approved {
+        background-color: #e8f5e9;
+        color: #27ae60;
+      }
+
+      .status-rejected {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .action-btn {
+        padding: 0.4rem 0.8rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        margin-right: 0.5rem;
+      }
+
+      .btn-approve {
+        background-color: #27ae60;
+        color: white;
+      }
+
+      .btn-approve:hover {
+        background-color: #229954;
+      }
+
+      .btn-reject {
+        background-color: #e74c3c;
+        color: white;
+      }
+
+      .btn-reject:hover {
+        background-color: #c0392b;
+      }
+
+      .empty-message {
+        text-align: center;
+        padding: 2rem;
+        color: #999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="admin-header">
+      <h1>Manage Registrations</h1>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="sidebar">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="registrations.html" class="active">Registrations</a>
+      <a href="exhibitors.html">Exhibitors</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="tickets.html">Support Tickets</a>
+    </div>
+
+    <div class="main-content">
+      <div class="admin-container">
+        <h2 style="color: #333; margin-bottom: 2rem;">Registrations</h2>
+
+        <div class="filters">
+          <button class="filter-btn active" onclick="filterBy('all')">All</button>
+          <button class="filter-btn" onclick="filterBy('pending')">Pending</button>
+          <button class="filter-btn" onclick="filterBy('approved')">Approved</button>
+          <button class="filter-btn" onclick="filterBy('rejected')">Rejected</button>
+          <button class="filter-btn" onclick="filterBy('solo')">Solo Only</button>
+          <button class="filter-btn" onclick="filterBy('team')">Team Only</button>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Participation</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="registrations-table">
+              <tr><td colspan="7" class="empty-message">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API_URL = 'http://localhost:3000/api';
+      let currentFilter = 'all';
+      let allRegistrations = [];
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+        loadRegistrations();
+      });
+
+      async function loadRegistrations() {
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/registrations`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+          });
+
+          if (!res.ok) throw new Error('Failed to load registrations');
+
+          allRegistrations = await res.json();
+          renderTable();
+        } catch (err) {
+          console.error(err);
+          alert('Failed to load registrations');
+        }
+      }
+
+      function filterBy(filter) {
+        currentFilter = filter;
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        renderTable();
+      }
+
+      function renderTable() {
+        let filtered = allRegistrations;
+
+        if (currentFilter === 'pending') filtered = filtered.filter(r => r.status === 'pending');
+        if (currentFilter === 'approved') filtered = filtered.filter(r => r.status === 'approved');
+        if (currentFilter === 'rejected') filtered = filtered.filter(r => r.status === 'rejected');
+        if (currentFilter === 'solo') filtered = filtered.filter(r => r.participation === 'solo');
+        if (currentFilter === 'team') filtered = filtered.filter(r => r.participation === 'team');
+
+        const tbody = document.getElementById('registrations-table');
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" class="empty-message">No registrations found</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(reg => `
+          <tr>
+            <td>${reg.full_name}</td>
+            <td>${reg.email}</td>
+            <td>${reg.registration_type}</td>
+            <td>${reg.participation}</td>
+            <td><span class="status-badge status-${reg.status}">${reg.status}</span></td>
+            <td>${new Date(reg.created_at).toLocaleDateString()}</td>
+            <td>
+              <button class="action-btn btn-approve" onclick="updateStatus('${reg.id}', 'approved')">Approve</button>
+              <button class="action-btn btn-reject" onclick="updateStatus('${reg.id}', 'rejected')">Reject</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      async function updateStatus(id, status) {
+        try {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`${API_URL}/registrations/${id}/status`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ status }),
+          });
+
+          if (!res.ok) throw new Error('Failed to update status');
+
+          loadRegistrations();
+        } catch (err) {
+          alert('Error: ' + err.message);
+        }
+      }
+
+      function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = 'login.html';
+      }
+    </script>
+  </body>
+</html>

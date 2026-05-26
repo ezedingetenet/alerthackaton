@@ -1,0 +1,787 @@
+body{
+     background-color: rgb(216, 216, 216);
+     margin: 0;
+     padding: 0;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    justify-content: space-between;
+    padding: 1rem 2rem;  
+    font-family: sans-serif;
+    font-weight: 500;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header .logo{
+    flex: 0;
+}
+
+.header .registerbutton{
+    flex: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.homeNavbar{
+    display: flex;
+    gap: 2rem;
+}
+
+.homeNavbar a{
+   text-decoration: none;
+   color: black;
+   font-weight: 500;
+   font-size: 15px;
+   padding-bottom: 4px;
+   
+
+}
+
+.homeNavbar a.active{
+    font-weight: 700;
+    color: #1a3a6e;
+    border-bottom: 3px solid #1a3a6e;
+}
+
+.homeNavbar a:hover {
+    color: #1a3a6e;
+}
+
+.homeNavbar button{
+    text-decoration: none;
+    stroke: none;
+    font-size: larger;
+    color: white;
+    background-color: orange;
+
+}
+/* Scroll Page 1 css*/
+.forum_digital {
+    background: linear-gradient(to right, #1a5a9e 0%, #2874b8 50%, #1a5a9e 100%);
+    color: white;
+    padding: 1rem 1rem;
+    text-align: center;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+.forum_digital h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    margin: 0;
+    color: white;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    max-width: 1200px;
+}
+
+.subtitle {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 2rem 0;
+    letter-spacing: 0.2px;
+}
+
+.location {
+    margin: 0 0 2.5rem 0;
+}
+
+.location p {
+    font-size: 1.2rem;
+    color: #ff9500;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+}
+
+.exhibitor-btn {
+    background-color: #ff9500;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 3rem;
+    transition: background-color 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+.exhibitor-btn:hover {
+    background-color: #e68a00;
+}
+
+.professionals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.professional-card {
+    background-color: rgba(30, 90, 150, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1.5rem 1.5rem;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+}
+
+.professional-card p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 0.2px;
+}
+
+
+/* Second scroll section - About the Forum */
+.about_forum {
+    background-color: #ffffff;
+    padding: 4rem 4rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.about_forum p:first-child {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1e5a96;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.about_forum h4 {
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: #0d2d4a;
+    margin: 0 0 2rem 0;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.about_forum p:nth-of-type(2),
+.about_forum p:nth-of-type(3) {
+    font-size: 1.1rem;
+    color: #3a4f7f;
+    line-height: 1.8;
+    margin: 0 auto 2rem auto;
+    font-weight: 400;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    max-width: 900px;
+}
+
+.about_forum p:last-child {
+    font-size: 1.15rem;
+    color: #3a4f7f;
+    line-height: 1.8;
+    margin: 3rem auto 0 auto;
+    font-weight: 400;
+    background-color: #f0f4f9;
+    padding: 2.5rem 3rem;
+    border-left: 6px solid #1e5a96;
+    border-radius: 0 12px 12px 0;
+    text-align: left;
+    font-style: italic;
+    max-width: 900px;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Third scroll section - Attends Forum */
+.attends_forum {
+    background-color: #f5f7fa;
+    padding: 4rem 4rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.attends_forum h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #0d2d4a;
+    margin: 0 0 3rem 0;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+}
+
+.communities-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.community-card {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    font-family: 'Inter', sans-serif;
+}
+
+.community-card.large {
+    display: flex;
+    align-items: center;
+}
+
+.community-card.large .card-content {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.community-card.large .icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.community-card h3 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #0d2d4a;
+    margin: 0 0 1rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.community-card p {
+    font-size: 1rem;
+    color: #5a6f8f;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.community-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.learn-more {
+    color: #1e5a96;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.learn-more:hover {
+    color: #1a3a6e;
+}
+
+.communities-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+/* Fourth scroll section - Venue */
+.venu_forum {
+    background: linear-gradient(to right, #1a5a9e 0%, #2874b8 50%, #1a5a9e 100%);
+    color: white;
+    padding: 5rem 4rem;
+    text-align: center;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.venu_forum .venue-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ff9500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.venu_forum h2 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: white;
+    margin: 0 0 2rem 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    font-family: 'Inter', sans-serif;
+}
+
+.venue-description {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
+    margin: 0 0 3rem 0;
+    max-width: 900px;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+}
+
+.venue-features {
+    background-color: rgba(30, 90, 150, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 3rem;
+    border-radius: 16px;
+    max-width: 800px;
+}
+
+.feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature:last-child {
+    margin-bottom: 0;
+}
+
+.feature .arrow {
+    color: #ff9500;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+.feature p {
+    font-size: 1.1rem;
+    color: white;
+    margin: 0;
+    text-align: left;
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Fifth scroll section - Schedule/Programme */
+.schedule {
+    background-color: #f5f7fa;
+    padding: 4rem 4rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.schedule .schedule-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1e5a96;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.schedule h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #0d2d4a;
+    margin: 0 0 3rem 0;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.timeline {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 60px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #1e5a96;
+}
+
+.timeline-item {
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -54px;
+    top: 6px;
+    width: 22px;
+    height: 22px;
+    background-color: #ff9500;
+    border-radius: 50%;
+    border: 4px solid #f5f7fa;
+    z-index: 1;
+    box-shadow: 0 0 0 2px #1e5a96;
+}
+
+.timeline-content {
+    background-color: white;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.timeline-content .time {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e5a96;
+    margin: 0 0 0.8rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.timeline-content .event {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0d2d4a;
+    margin: 0;
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Sixth scroll section - Partners */
+.partners {
+    background-color: #f5f7fa;
+    padding: 4rem 4rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.partners .partners-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1e5a96;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.partners h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #0d2d4a;
+    margin: 0 0 3rem 0;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.partner-card {
+    background-color: white;
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.partner-logo {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+}
+
+.partner-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.partner-type {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #8a9aaf;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Footer Section */
+.footer {
+    display: flex;
+    flex-direction: column;
+}
+
+.cta-section {
+    background-color: #e8a84a;
+    padding: 4rem 2rem;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.cta-section h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: white;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.cta-subtitle {
+    font-size: 1.3rem;
+    color: white;
+    margin: 0 0 2.5rem 0;
+    font-weight: 400;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.cta-btn.primary {
+    background-color: #0d2d4a;
+    color: white;
+}
+
+.cta-btn.primary:hover {
+    background-color: #1a3a6e;
+}
+
+.cta-btn.secondary {
+    background-color: #0d2d4a;
+    color: white;
+}
+
+.cta-btn.secondary:hover {
+    background-color: #1a3a6e;
+}
+
+.main-footer {
+    background-color: #0d2d4a;
+    color: white;
+    padding: 3.5rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-column h3 {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: white;
+    margin: 0 0 1rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-column h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    margin: 1.5rem 0 0 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-column p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-column ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-column ul li a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: white;
+}
+
+/* About Page Styles */
+.about-content {
+    font-family: 'Inter', sans-serif;
+}
+
+.about-forum-section {
+    background-color: #ffffff;
+    padding: 4rem 4rem;
+    text-align: center;
+}
+
+.about-forum-section h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #0d2d4a;
+    margin: 0 0 2.5rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.about-forum-section p {
+    font-size: 1.1rem;
+    color: #3a4f7f;
+    line-height: 1.8;
+    margin: 0 0 2rem 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Core Values Section */
+.core-values-section {
+    background-color: #f5f7fa;
+    padding: 4rem 4rem;
+}
+
+.core-values-section h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #0d2d4a;
+    margin: 0 0 3rem 0;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.value-card {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.value-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.value-card h3 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #0d2d4a;
+    margin: 0 0 1rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.value-card p {
+    font-size: 1rem;
+    color: #5a6f8f;
+    line-height: 1.6;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Alert Hospital Section */
+.alert-hospital-section {
+    background-color: #4a8f6f;
+    padding: 4rem 4rem;
+    text-align: center;
+}
+
+.alert-hospital-section h2 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: white;
+    margin: 0 0 1.5rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.alert-hospital-section > p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.8;
+    margin: 0 0 3rem 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Inter', sans-serif;
+}
+
+.hospital-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.feature-card h3 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #0d2d4a;
+    margin: 0 0 1rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: #5a6f8f;
+    line-height: 1.6;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
