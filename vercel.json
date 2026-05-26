@@ -1,5 +1,6 @@
 {
   "buildCommand": "npm install",
+  "outputDirectory": "FrontEnd",
   "functions": {
     "api/**/*.js": {
       "memory": 1024,
@@ -10,3 +11,4 @@
     "NODE_ENV": "production"
   }
 }
+
