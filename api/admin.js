@@ -1,5 +1,5 @@
-import { supabase } from '../../../lib/supabase.js';
-import { getTokenFromRequest, verifyToken } from '../../../lib/auth.js';
+import { supabase } from '../lib/supabase.js';
+import { getTokenFromRequest, verifyToken } from '../lib/auth.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
