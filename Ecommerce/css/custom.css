@@ -1,0 +1,234 @@
+/* 
+ * Habesha Thread - Core Custom Stylesheet
+ * Bridges ancestral Ethiopian weaving details (Tibeb) with contemporary architectural tailoring.
+ */
+
+:root {
+  --color-cream: #fbf9f8;
+  --color-charcoal: #1a1a1a;
+  --color-gold: #d4af37;
+  --color-gold-hover: #b89324;
+  --color-gray: #6b6b6b;
+  --color-border: rgba(26, 26, 26, 0.1);
+  --color-border-light: rgba(26, 26, 26, 0.05);
+}
+
+/* 1. Global Typography & Core System Overrides */
+body {
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-hover);
+}
+
+/* Sharp elements for custom tailoring branding */
+button, input, select, textarea, .card, .badge {
+  border-radius: 0px !important;
+}
+
+/* 2. Traditional Tibeb Accent Patterns (Artisanal Custom CSS Weaving) */
+.tibeb-pattern {
+  background-image: repeating-linear-gradient(45deg, var(--color-gold) 0px, var(--color-gold) 2px, transparent 2px, transparent 8px),
+                    repeating-linear-gradient(-45deg, var(--color-charcoal) 0px, var(--color-charcoal) 1px, transparent 1px, transparent 6px);
+  background-size: 16px 16px;
+  opacity: 0.15;
+}
+
+.tibeb-border-top {
+  position: relative;
+}
+.tibeb-border-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background-image: repeating-linear-gradient(90deg, 
+    var(--color-charcoal) 0px, var(--color-charcoal) 8px, 
+    var(--color-gold) 8px, var(--color-gold) 16px, 
+    var(--color-cream) 16px, var(--color-cream) 24px
+  );
+  background-size: 24px 6px;
+}
+
+.tibeb-accent-line {
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-charcoal) 0%, var(--color-gold) 50%, var(--color-charcoal) 100%);
+  width: 100%;
+}
+
+/* Mobile-specific geometric border pattern */
+.tibeb-border-mobile {
+  background-image: linear-gradient(45deg, var(--color-gold) 25%, transparent 25%), 
+                    linear-gradient(-45deg, var(--color-gold) 25%, transparent 25%), 
+                    linear-gradient(45deg, transparent 75%, var(--color-gold) 75%), 
+                    linear-gradient(-45deg, transparent 75%, var(--color-gold) 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+}
+
+/* Mobile specific dual pattern divider */
+.tibeb-divider-mobile {
+  height: 16px;
+  background-image: repeating-linear-gradient(45deg, var(--color-gold) 0, var(--color-gold) 2px, transparent 2px, transparent 8px),
+                    repeating-linear-gradient(-45deg, var(--color-gold) 0, var(--color-gold) 2px, transparent 2px, transparent 8px);
+  background-size: 16px 16px;
+  opacity: 0.3;
+}
+
+/* 3. Navigation & Header Animations */
+.nav-blur {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* 4. Luxury Cart & Search Sidebar Slide-outs */
+.drawer-transition {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+}
+
+.cart-overlay {
+  background-color: rgba(26, 26, 26, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: opacity 0.3s ease;
+}
+
+/* 5. Custom Cross-Document View Transitions */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  /* Custom Transitions */
+  ::view-transition-old(root) {
+    animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1) both fade-out;
+  }
+  ::view-transition-new(root) {
+    animation: 0.4s cubic-bezier(0.4, 0, 0.2, 1) both fade-in;
+  }
+
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Specific view transitions for elements */
+  .hero-transition-title {
+    view-transition-name: hero-title;
+  }
+  .product-image-transition {
+    view-transition-name: product-image-main;
+  }
+  .product-title-transition {
+    view-transition-name: product-title;
+  }
+}
+
+/* 6. Parallax & Scroll Driven Animations */
+@supports ((animation-timeline: view()) and (animation-range: entry)) {
+  @keyframes scroll-scale-up {
+    from {
+      transform: scale(0.95);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale(1.03);
+      opacity: 1;
+    }
+  }
+
+  .scroll-parallax-container {
+    view-timeline: --scroll-timeline;
+  }
+
+  .scroll-parallax-image {
+    animation: scroll-scale-up linear both;
+    animation-timeline: --scroll-timeline;
+    animation-range: entry 10% exit 90%;
+  }
+}
+
+/* Hover Zoom effects */
+.hover-zoom-container {
+  overflow: hidden;
+  position: relative;
+}
+.hover-zoom-img {
+  transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hover-zoom-container:hover .hover-zoom-img {
+  transform: scale(1.05);
+}
+
+/* Toast Message */
+.toast-msg {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--color-charcoal);
+  color: var(--color-cream);
+  padding: 16px 24px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  border-left: 4px solid var(--color-gold);
+  transform: translateY(150%);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.toast-msg.show {
+  transform: translateY(0);
+}
+
+/* Size selected glow style */
+.size-btn-active {
+  background-color: var(--color-charcoal) !important;
+  color: var(--color-cream) !important;
+  border-color: var(--color-charcoal) !important;
+  box-shadow: 0 4px 12px rgba(26, 26, 26, 0.15);
+}
+
+/* Complete the look responsive adjustments */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 7. Mobile Size Bottom Sheet Animation */
+#size-sheet {
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+#size-sheet.open {
+  transform: translateY(0);
+}

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Habesha Thread | ADMAS</title>
+  
+  <!-- Tailwind CSS Engine -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#ffffff",
+            "surface-bright": "#fbf9f8",
+            "on-surface": "#1b1c1c",
+            "surface-variant": "#e4e2e2",
+            "surface-container": "#efeded",
+            "background": "#fbf9f8",
+            "secondary": "#735c00",
+            "on-secondary": "#ffffff",
+            "tertiary": "#000000",
+            "outline": "#747878",
+            "surface-container-lowest": "#ffffff",
+            "surface": "#fbf9f8",
+            "primary": "#000000",
+            "surface-container-high": "#e9e8e7",
+            "primary-container": "#1c1b1b"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "md": "24px",
+            "base": "8px",
+            "sm": "12px",
+            "container-max": "1280px",
+            "xl": "80px",
+            "xs": "4px",
+            "lg": "48px",
+            "gutter": "24px"
+          },
+          "fontFamily": {
+            "headline-md": ["Playfair Display"],
+            "headline-lg": ["Playfair Display"],
+            "body-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "headline-xl": ["Playfair Display"],
+            "label-sm": ["Inter"],
+            "display-lg-mobile": ["Playfair Display"],
+            "display-lg": ["Playfair Display"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+            "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "label-lg": ["14px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+            "headline-xl": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+            "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+            "display-lg-mobile": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}],
+            "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <!-- Core Design System Custom Styles -->
+  <link href="css/custom.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden selection:bg-secondary selection:text-white">
+
+  <!-- 1. Shared Navigation Bar -->
+  <nav class="fixed top-0 w-full z-50 bg-surface/80 nav-blur border-b border-outline/10 transition-all duration-300">
+    <div class="flex justify-between items-center px-md md:px-lg py-md max-w-container-max mx-auto h-20">
+      <div class="flex items-center gap-sm">
+        <button onclick="document.getElementById('mobile-drawer').classList.remove('translate-x-full');" class="md:hidden hover:text-secondary p-1">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <a href="index.html" class="font-headline-lg text-2xl font-bold text-primary uppercase tracking-tighter hover:text-secondary transition-colors">
+          <span class="md:inline hidden">Habesha Thread</span>
+          <span class="md:hidden inline">ADMAS</span>
+        </a>
+      </div>
+      
+      <div class="hidden md:flex items-center gap-xl">
+        <a class="font-label-lg text-primary border-b border-secondary pb-px transition-colors" href="collection.html">Collections</a>
+        <a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="collection.html">Editorial</a>
+        <a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="atelier.html">Atelier Story</a>
+        <a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="atelier.html">Private Bespoke</a>
+      </div>
+      
+      <div class="flex items-center gap-md">
+        <!-- Search Trigger -->
+        <button class="search-trigger hover:text-secondary transition-colors p-1 flex items-center justify-center">
+          <span class="material-symbols-outlined text-[24px] align-middle">search</span>
+        </button>
+        
+        <!-- Cart/Bag Trigger -->
+        <button class="cart-trigger hover:text-secondary transition-colors relative p-1 flex items-center justify-center">
+          <span class="material-symbols-outlined text-[24px] align-middle">shopping_bag</span>
+          <span class="cart-count-badge absolute -top-1 -right-1 bg-primary text-white w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex justify-end">
+    <div onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full');" class="absolute inset-0 bg-black/40 backdrop-blur-xs"></div>
+    <div class="relative w-72 h-full bg-surface shadow-2xl flex flex-col p-lg justify-start space-y-lg border-l border-outline/10 z-50">
+      <div class="flex justify-between items-center pb-md border-b border-outline/10">
+        <span class="font-label-lg uppercase tracking-widest text-[#d4af37]">House Menu</span>
+        <button onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full');" class="hover:text-secondary">
+          <span class="material-symbols-outlined text-[24px]">close</span>
+        </button>
+      </div>
+      <div class="flex flex-col gap-md">
+        <a class="font-headline-md text-xl hover:text-secondary transition-colors" href="index.html">Home</a>
+        <a class="font-headline-md text-xl hover:text-secondary transition-colors" href="collection.html">Heritage Collection</a>
+        <a class="font-headline-md text-xl hover:text-secondary transition-colors" href="collection.html">Contemporary Wear</a>
+        <a class="font-headline-md text-xl hover:text-secondary transition-colors" href="atelier.html">Private Atelier</a>
+        <a class="font-headline-md text-xl hover:text-secondary transition-colors" href="atelier.html">Loom Story</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- 2. Hero Lookbook Section (Fully Responsive Picture Swapping) -->
+    <section class="relative h-[90vh] md:h-screen w-full flex items-center justify-center overflow-hidden scroll-parallax-container">
+      <picture class="absolute inset-0 w-full h-full">
+        <!-- Mobile Specific Tall Hero -->
+        <source media="(max-width: 768px)" srcset="https://lh3.googleusercontent.com/aida/ADBb0uglgT_LfX6Ghmma7AA-jjmXkLuYsePdZ7MOnWY-9JaNvEIVYZKa_b9UFO1ZIDWEDKrOyQ43KsqPkL-CgCfGcqD4skk3DeUk-pHqqDvP_FxZB8NBv0qXBnjA6eV9Ltdr6-7hiTTNXq9rLVbMk1qteI6se53N2sJJxcAjJDi1LN_EQlPgPEX_kK5SN_wC0o1uI7EfEeIvi9DmrRUPIi59B5nC8tWZpQt9EtiX3ZY4g_Q5APrLAeCklTz_glY"/>
+        <!-- Desktop Parallax Hero -->
+        <img alt="The New Heritage Hero" class="w-full h-full object-cover scroll-parallax-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOyijPm1Ox0Ibg5LKTnbHYcTNf7rGkQ-1__nNMaTBjXm-ma5FuwFXUKNZO1lmVSHLntOKd0BDTZ_YN6BjaGYbX80xhVn48cvn0f4Pk6g0zzlGmco3YMiFThSBrsWIC8A__qhLuUSsCnglPfx8DqCx6wJFpkppQzKD6zeGVjpKcOSOFNv1Fglw2S6_j4tNDbxCmnSYjDoQEgN28Xzi5G-xDQFi5vXCbP0X47mmoCabXOCBb1FmArX32-5ltn4nMV6irtVLKKME2c3Y"/>
+      </picture>
+      
+      <!-- Gradient Fade-in Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30"></div>
+      
+      <!-- Content Box -->
+      <div class="absolute inset-0 flex flex-col justify-end md:justify-center p-gutter pb-xl md:pb-0 md:relative md:z-10 text-left md:text-center md:px-lg max-w-4xl mx-auto">
+        <div class="mb-sm md:hidden">
+          <span class="bg-secondary text-white font-label-sm px-2.5 py-1 uppercase tracking-widest text-[9px] font-bold">New Arrival</span>
+        </div>
+        <span class="font-label-lg text-white mb-base block tracking-[0.4em] uppercase opacity-90 text-[12px] md:text-[14px]">Spring / Summer 2026</span>
+        <h1 class="font-display-lg text-white text-[10vw] md:text-[6vw] leading-[1.0] uppercase mix-blend-difference font-bold tracking-tight hero-transition-title mb-md">
+          THE NEW<br/>HERITAGE
+        </h1>
+        <div class="flex flex-col sm:flex-row justify-start md:justify-center gap-md">
+          <a href="collection.html" class="bg-white text-primary px-lg py-sm md:py-md font-label-lg uppercase hover:bg-secondary hover:text-white transition-all duration-500 tracking-widest text-center shadow-lg shadow-black/10 text-xs md:text-sm font-bold">
+            Discover Collection
+          </a>
+          <a href="collection.html" class="border border-white text-white px-lg py-sm md:py-md font-label-lg uppercase hover:bg-white hover:text-primary transition-all duration-500 tracking-widest text-center text-xs md:text-sm">
+            View Lookbook
+          </a>
+        </div>
+      </div>
+      
+      <div class="absolute bottom-md left-lg hidden lg:block z-10">
+        <p class="font-label-sm text-white/70 text-vertical uppercase tracking-widest text-[10px]">Addis Ababa • London • New York</p>
+      </div>
+    </section>
+
+    <!-- Mobile Pattern Divider -->
+    <div class="tibeb-divider-mobile md:hidden"></div>
+
+    <!-- 3. Mobile Featured Arrivals Section (Horizontal scroll for mobile) -->
+    <section class="py-lg bg-surface md:hidden border-b border-outline/10">
+      <div class="px-gutter mb-md flex justify-between items-end">
+        <div>
+          <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block mb-xs text-[10px]">Curation</span>
+          <h3 class="font-headline-md text-headline-md text-primary font-bold">Featured Arrivals</h3>
+        </div>
+        <a class="text-on-surface-variant underline font-label-sm mb-1 text-xs" href="collection.html">View All</a>
+      </div>
+      
+      <!-- Horizontal Scrollable Container -->
+      <div class="flex overflow-x-auto scrollbar-hide gap-md px-gutter pb-md">
+        <!-- Card 1 -->
+        <div class="flex-none w-[260px] space-y-sm">
+          <div class="relative aspect-[3/4] bg-surface-container border border-outline/5">
+            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgYv92RbZPXMSfH1bDgF9bNiaLDR0DWSJkGmlpbrs4yP0ARwprwW1whpxqZC0CVwSdtOCpe96d-Z_FfKySoTRhjjiYGpkB79vBzmYBEI54OQPvm4-MjIumNuCy_0jzR9QeDZ15fdz-1OTQaLsCsdi8AvHNHrn3hRolG1nSO8z0mg1cM-hV8NGA_vfQ5tNWXeiG9LMMxDls-v_wjpwbtSBLBUaHQawM1schxjExXwVIvbXQ8cuwE8I644CBdfyJ7Qi13e1zXjNaJHQ"/>
+            <button data-product-id="gonder-set" class="add-to-cart-btn absolute bottom-3 right-3 bg-white text-primary p-2 shadow-lg border border-outline/15 hover:bg-secondary hover:text-white transition-colors">
+              <span class="material-symbols-outlined text-[20px] align-middle">shopping_bag</span>
+            </button>
+          </div>
+          <div class="flex flex-col">
+            <h4 class="font-headline-md text-[16px] text-primary font-bold">Gonder Formal Set</h4>
+            <span class="font-body-md text-secondary text-sm font-semibold">$450.00</span>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="flex-none w-[260px] space-y-sm">
+          <div class="relative aspect-[3/4] bg-surface-container border border-outline/5">
+            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgYv92RbZPXMSfH1bDgF9bNiaLDR0DWSJkGmlpbrs4yP0ARwprwW1whpxqZC0CVwSdtOCpe96d-Z_FfKySoTRhjjiYGpkB79vBzmYBEI54OQPvm4-MjIumNuCy_0jzR9QeDZ15fdz-1OTQaLsCsdi8AvHNHrn3hRolG1nSO8z0mg1cM-hV8NGA_vfQ5tNWXeiG9LMMxDls-v_wjpwbtSBLBUaHQawM1schxjExXwVIvbXQ8cuwE8I644CBdfyJ7Qi13e1zXjNaJHQ"/>
+            <button data-product-id="axum-tunic" class="add-to-cart-btn absolute bottom-3 right-3 bg-white text-primary p-2 shadow-lg border border-outline/15 hover:bg-secondary hover:text-white transition-colors">
+              <span class="material-symbols-outlined text-[20px] align-middle">shopping_bag</span>
+            </button>
+          </div>
+          <div class="flex flex-col">
+            <h4 class="font-headline-md text-[16px] text-primary font-bold">Axum Linen Tunic</h4>
+            <span class="font-body-md text-secondary text-sm font-semibold">$280.00</span>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="flex-none w-[260px] space-y-sm">
+          <div class="relative aspect-[3/4] bg-surface-container border border-outline/5">
+            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgYv92RbZPXMSfH1bDgF9bNiaLDR0DWSJkGmlpbrs4yP0ARwprwW1whpxqZC0CVwSdtOCpe96d-Z_FfKySoTRhjjiYGpkB79vBzmYBEI54OQPvm4-MjIumNuCy_0jzR9QeDZ15fdz-1OTQaLsCsdi8AvHNHrn3hRolG1nSO8z0mg1cM-hV8NGA_vfQ5tNWXeiG9LMMxDls-v_wjpwbtSBLBUaHQawM1schxjExXwVIvbXQ8cuwE8I644CBdfyJ7Qi13e1zXjNaJHQ"/>
+            <button data-product-id="lasta-blazer" class="add-to-cart-btn absolute bottom-3 right-3 bg-white text-primary p-2 shadow-lg border border-outline/15 hover:bg-secondary hover:text-white transition-colors">
+              <span class="material-symbols-outlined text-[20px] align-middle">shopping_bag</span>
+            </button>
+          </div>
+          <div class="flex flex-col">
+            <h4 class="font-headline-md text-[16px] text-primary font-bold">Lasta Modern Blazer</h4>
+            <span class="font-body-md text-secondary text-sm font-semibold">$520.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Editorial Intro (Unified responsive styling) -->
+    <section class="py-xl px-lg max-w-container-max mx-auto border-b border-outline/10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-lg items-center">
+        <div class="md:col-span-5 mb-lg md:mb-0 space-y-md">
+          <span class="text-secondary font-label-lg uppercase tracking-[0.25em] text-xs">Architectural Design Philosophy</span>
+          <h2 class="font-headline-xl text-primary leading-tight font-bold">DEFINING MODERN ETHIOPIAN LUXURY.</h2>
+          <p class="font-body-lg text-on-surface-variant leading-relaxed">
+            A dialogue between ancestral craftsmanship and contemporary silhouettes. We redefine heritage not as a museum static piece, but as a living, breathing evolution of tailored style.
+          </p>
+        </div>
+        <div class="md:col-span-7 flex justify-end">
+          <div class="relative w-full max-w-md aspect-[3/4] hover-zoom-container bg-surface-container-high border border-outline/10">
+            <img alt="Craft Detail" class="w-full h-full object-cover hover-zoom-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7r4L-hRe8rLWr0hLadRlJS1egeUffXFzsUHfRqgKvqhFxenHlGBGqvx4w7LasTNsF97ubmjtjKESQh0MVMf_O3rCDXeZFveYacifIy3PZpXGPqnAcfCwsL5cWJfZsJo6dzdym5MfHymDplo0zIykdPI0JGsoTyECtCyRMHFOz_eQaOnVpfLGnRoa7OJ9aPW-jG6eQ-bUjryTEwYPOVOrfH3KiD8FV3I8JqmVMZn8mRmriyOFtkE18pPCCD5IJ8ru50XMOa2ZBq38"/>
+            <div class="absolute -bottom-6 -left-6 bg-secondary text-white p-lg max-w-[220px] shadow-xl">
+              <span class="font-headline-md italic block text-xl">Tibeb.</span>
+              <span class="font-label-sm uppercase tracking-tighter text-[10px] opacity-90">The ancient art of gold hand-weaving.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Featured Collection: Asymmetrical Masonry Grid (Desktop only) + Mobile Bento List -->
+    <section class="py-xl bg-surface-container-low overflow-hidden">
+      <div class="max-w-container-max mx-auto px-lg">
+        <div class="flex flex-col md:flex-row justify-between items-baseline mb-xl gap-md">
+          <div>
+            <span class="text-secondary font-label-lg uppercase tracking-[0.3em] mb-xs block text-xs">Curator's Spotlight</span>
+            <h2 class="font-display-lg text-primary uppercase font-bold tracking-tighter">Current Curation</h2>
+          </div>
+          <a class="font-label-lg border-b-2 border-primary pb-1 hover:text-secondary hover:border-secondary transition-all text-xs tracking-widest uppercase font-bold" href="collection.html">
+            SHOP ALL PIECES
+          </a>
+        </div>
+        
+        <!-- Desktop Curation Grid -->
+        <div class="hidden md:grid grid-cols-1 md:grid-cols-2 gap-xl md:gap-lg">
+          <!-- Traditional Modern Card -->
+          <div class="group relative flex flex-col justify-between">
+            <div class="aspect-[2/3] overflow-hidden mb-md border border-outline/5 relative hover-zoom-container">
+              <img alt="Traditional Modern" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 hover-zoom-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDEmj5AOH4ciFe4Xu8JtQR1lt3cvII18TgmGFOKYDGqbgZOHiCPr1wlPh402wtx_jS013EVN_LPGVunAJmk8lQznITelibGop1wZosXrA-NFB7jOK4joBg78-r59bAaP84ysVjDbl9LRh4B9U9RFOn6yLZ5_coMhGucWU1uQdHSa2odIblmovUsTG15_sh1zX6obFQfvDHNcxxsCZ1Do13N1Z8p1HLKpGubmZjUDSTdquhoLKNI0jnGqnPihL3uf-FHKAxPFEkmbs"/>
+              <div class="absolute top-md left-md bg-secondary text-white px-md py-xs font-label-sm uppercase tracking-widest text-[10px]">
+                HERITAGE EDIT
+              </div>
+            </div>
+            <div class="flex flex-col gap-xs pr-lg">
+              <span class="font-label-sm uppercase text-secondary tracking-widest text-[10px]">100% Gabi hand-woven cotton</span>
+              <h3 class="font-headline-lg text-primary font-bold">THE ARTISAN GABI TUNIC</h3>
+              <p class="font-body-md text-on-surface-variant mb-md">
+                Hand-spun traditional cotton weaving reimagined into contemporary architectural silhouettes. Crafted with deep emerald accent seams.
+              </p>
+              <div class="flex items-center gap-md">
+                <a href="product.html" class="w-fit font-label-lg uppercase border-2 border-primary px-lg py-sm hover:bg-primary hover:text-white transition-all text-xs tracking-widest font-bold">
+                  Discover Details
+                </a>
+                <button data-product-id="gabi-tunic" class="add-to-cart-btn bg-secondary text-white px-lg py-sm font-label-lg uppercase hover:bg-primary transition-all text-xs tracking-widest font-bold shadow-md shadow-secondary/10">
+                  Quick Buy • $720
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Urban Contemporary Card -->
+          <div class="group relative flex flex-col justify-between mt-24">
+            <div class="aspect-[2/3] overflow-hidden mb-md border border-outline/5 relative hover-zoom-container">
+              <img alt="Urban Contemporary" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 hover-zoom-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7si1vTCGyOBQo5aElSk334feMezql9lBWEuIhes1GJ9IoUPhLv5oJT-0pJuKraG65EYyVPbxaRMACa9X47ie_3pjo5lTva-2GF9_985G9EkFA_rl3JDtwi0jKXkyrB2CeKFPvLUfHFplUnU6kGSpRNGBf1owB5dqbjXtwqDgYUf1Tc1W5g4k_DFT05XVC-nePDf0-LPuaMjMdWV1TzuS679PhSIVNzgpVOQpZbMesz-rAfCL1k7Zwor99xXD5zlk8Bb77ayShBMM"/>
+              <div class="absolute top-md left-md bg-primary text-white px-md py-xs font-label-sm uppercase tracking-widest text-[10px]">
+                THE CITY EDIT
+              </div>
+            </div>
+            <div class="flex flex-col gap-xs pr-lg">
+              <span class="font-label-sm uppercase text-secondary tracking-widest text-[10px]">Italian linen / East African accents</span>
+              <h3 class="font-headline-lg text-primary font-bold">CITY NEGADE BLAZER</h3>
+              <p class="font-body-md text-on-surface-variant mb-md">
+                Savile Row structured design standards infused with distinct East African geometry, tailored for the contemporary global scene.
+              </p>
+              <div class="flex items-center gap-md">
+                <a href="product.html" class="w-fit font-label-lg uppercase border-2 border-primary px-lg py-sm hover:bg-primary hover:text-white transition-all text-xs tracking-widest font-bold">
+                  Discover Details
+                </a>
+                <button data-product-id="negade-blazer" class="add-to-cart-btn bg-secondary text-white px-lg py-sm font-label-lg uppercase hover:bg-primary transition-all text-xs tracking-widest font-bold shadow-md shadow-secondary/10">
+                  Quick Buy • $890
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Bento-style Editorial (Mobile only) -->
+        <div class="md:hidden flex flex-col gap-md">
+          <div class="relative group overflow-hidden border border-outline/10">
+            <img alt="Artisan focus" class="w-full aspect-square object-cover grayscale hover:grayscale-0 transition-transform duration-700 hover:scale-105" src="https://lh3.googleusercontent.com/aida/ADBb0ujak84zS_6dT8lN340XlAOU53bVToKgIjPy8KBpkLCpSiljSfqa4YN0tHPiV0EgaQjGMC0xMwHQHGtDYYJiDhrx3czbFEnLT3--qis9lFl6w3oSN7Mc1jWDF4uvQq_gQM4v2JZ5MQ39FW8K4EgYjnl8juCoZ_L_03doWtsSSTiESH0zI_9NeD0f3gChqZmI7Iv7dcEq9bG8gE_KrgHorkbOoIt0c7CCnFUfM0JHkCnqoJwbYYJ5YjtvDQ"/>
+            <div class="absolute inset-0 bg-black/20"></div>
+          </div>
+          <div class="p-md bg-primary text-on-primary border border-primary space-y-md">
+            <span class="text-secondary font-label-sm uppercase tracking-widest text-[10px] font-bold">Artisanship</span>
+            <h4 class="font-headline-md text-2xl font-bold">Woven History</h4>
+            <p class="font-body-md text-white/80 leading-relaxed text-sm">
+              Every thread tells a story of generation-old mastery. Our weavers in Addis Ababa blend ancient techniques with modern silhouettes for the discerning contemporary man.
+            </p>
+            <a href="atelier.html" class="inline-block border border-white text-white px-lg py-2 font-label-lg text-xs uppercase tracking-widest hover:bg-white hover:text-primary transition-all text-center">
+              Our Full Story
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Artisanal Ribbon Divider (Fidelity geometry pattern) -->
+    <div class="tibeb-border-top h-8 w-full bg-surface"></div>
+
+    <!-- 7. The Atelier Bespoke Section -->
+    <section class="py-xl px-lg max-w-container-max mx-auto border-b border-outline/10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-lg items-center">
+        <div class="md:col-span-2">
+          <div class="relative group overflow-hidden border border-outline/15 shadow-xl">
+            <img alt="Atelier Scene" class="w-full h-[320px] md:h-[500px] object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7r4L-hRe8rLWr0hLadRlJS1egeUffXFzsUHfRqgKvqhFxenHlGBGqvx4w7LasTNsF97ubmjtjKESQh0MVMf_O3rCDXeZFveYacifIy3PZpXGPqnAcfCwsL5cWJfZsJo6dzdym5MfHymDplo0zIykdPI0JGsoTyECtCyRMHFOz_eQaOnVpfLGnRoa7OJ9aPW-jG6eQ-bUjryTEwYPOVOrfH3KiD8FV3I8JqmVMZn8mRmriyOFtkE18pPCCD5IJ8ru50XMOa2ZBq38"/>
+            <div class="absolute inset-0 bg-primary/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center duration-500">
+              <a href="atelier.html" class="text-white font-label-lg uppercase tracking-[0.2em] border-2 border-white px-xl py-lg hover:bg-white hover:text-black transition-all">
+                Enter Atelier Gallery
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col justify-center space-y-md">
+          <span class="font-label-sm uppercase tracking-widest text-secondary text-xs">Private Tailoring Service</span>
+          <h2 class="font-headline-xl text-primary font-bold">MADE FOR YOU.</h2>
+          <p class="font-body-md text-on-surface-variant leading-relaxed">
+            Schedule a private consultation at our London or Addis Ababa gallery for a premium, custom tailoring experience featuring our exclusive traditional loom weaves.
+          </p>
+          <a class="w-fit font-label-lg text-primary underline underline-offset-8 hover:text-secondary transition-colors font-bold tracking-widest text-xs uppercase" href="atelier.html">
+            BOOK PRIVATE CONSULTATION
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Premium Newsletter -->
+    <section class="py-xl bg-[#1a1a1a] text-white text-center border-t-2 border-secondary relative overflow-hidden">
+      <!-- Decorative pattern background -->
+      <div class="absolute inset-0 tibeb-pattern pointer-events-none"></div>
+      <div class="relative z-10 max-w-xl mx-auto px-lg space-y-md">
+        <h2 class="font-display-lg text-white font-bold text-3xl md:text-4xl tracking-tight uppercase">Join the Vanguard</h2>
+        <p class="font-body-lg text-cream/70">Access exclusive seasonal releases and heritage narratives from the loom.</p>
+        <form onsubmit="event.preventDefault(); alert('THANK YOU FOR JOINING THE WEAVER\'S CIRCLE.');" class="flex flex-col md:flex-row gap-sm md:border-b md:border-white/30 md:pb-sm focus-within:border-secondary transition-colors mt-lg">
+          <input class="bg-transparent border-b border-white/30 md:border-none p-2 md:p-0 md:flex-1 text-white placeholder:text-white/40 text-lg uppercase tracking-wider focus:outline-none text-center md:text-left" placeholder="ENTER EMAIL ADDRESS" type="email" required/>
+          <button class="bg-white text-primary md:bg-transparent md:text-secondary hover:text-white transition-colors font-bold tracking-widest text-xs py-3 md:py-0 uppercase">
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- 9. Premium Footer -->
+  <footer class="bg-surface py-xl px-lg border-t border-outline/10">
+    <div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-xl">
+      <div class="md:col-span-2 space-y-md">
+        <div class="font-headline-lg text-3xl font-bold text-primary uppercase tracking-tighter">ADMAS</div>
+        <p class="font-body-md text-on-surface-variant max-w-sm leading-relaxed">
+          Crafting the future of African luxury through the lens of ancestry, sustainability, and exceptional bespoke tailoring.
+        </p>
+        <div class="flex gap-md pt-base">
+          <a class="w-10 h-10 border border-outline/30 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all text-[#1a1a1a]" href="#">
+            <span class="material-symbols-outlined text-md">public</span>
+          </a>
+          <a class="w-10 h-10 border border-outline/30 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all text-[#1a1a1a]" href="#">
+            <span class="material-symbols-outlined text-md">alternate_email</span>
+          </a>
+        </div>
+      </div>
+      <div class="flex flex-col gap-sm">
+        <h4 class="font-label-lg text-primary uppercase mb-base tracking-widest text-xs font-bold">Explore</h4>
+        <a class="font-body-md text-sm text-on-surface-variant hover:text-primary transition-colors" href="collection.html">New Curation</a>
+        <a class="font-body-md text-sm text-on-surface-variant hover:text-primary transition-colors" href="collection.html">Negus Suits</a>
+        <a class="font-body-md text-sm text-on-surface-variant hover:text-primary transition-colors" href="collection.html">Loom to Wear</a>
+        <a class="font-body-md text-sm text-on-surface-variant hover:text-primary transition-colors" href="atelier.html">Private Atelier</a>
+      </div>
+      <div class="flex flex-col gap-sm">
+        <h4 class="font-label-lg text-primary uppercase mb-base tracking-widest text-xs font-bold">House</h4>
+        <a class="font-body-md text-sm text-on-surface-variant hover:text-primary transition-colors" href="atelier.html">Our Weaving Story</a>
+        <a class="font-body-md text-sm text-on-surface-variant hover:text-primary transition-colors" href="atelier.html">Sustainability</a>
+        <a class="font-body-md text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Shipping &amp; Customs</a>
+        <a class="font-body-md text-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Contact &amp; Support</a>
+      </div>
+    </div>
+    <div class="max-w-container-max mx-auto mt-xl pt-lg border-t border-outline/10 flex flex-col md:flex-row justify-between items-center gap-md">
+      <p class="font-label-sm text-on-surface-variant text-[11px] uppercase tracking-wider">© 2026 ADMAS ETHIOPIA. ALL RIGHTS RESERVED.</p>
+      <div class="flex gap-lg">
+        <a class="font-label-sm text-on-surface-variant hover:text-primary text-[11px] uppercase tracking-wider" href="#">PRIVACY</a>
+        <a class="font-label-sm text-on-surface-variant hover:text-primary text-[11px] uppercase tracking-wider" href="#">TERMS OF HOUSE</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic JS Load -->
+  <script src="js/main.js"></script>
+</body>
+</html>

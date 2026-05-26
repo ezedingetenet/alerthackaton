@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Habesha Thread | The Heritage Modernist Suit</title>
+  
+  <!-- Tailwind CSS Engine -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#fbf9f8",
+            "primary": "#000000",
+            "surface": "#fbf9f8",
+            "on-surface-variant": "#444748",
+            "on-surface": "#1b1c1c",
+            "surface-container": "#efeded",
+            "on-secondary": "#ffffff",
+            "surface-container-highest": "#e4e2e2",
+            "surface-container-high": "#e9e8e7",
+            "secondary-fixed-dim": "#e9c349",
+            "surface-container-low": "#f5f3f3",
+            "outline": "#747878",
+            "outline-variant": "#c4c7c7",
+            "secondary": "#735c00",
+            "background": "#fbf9f8"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "sm": "12px",
+            "container-max": "1280px",
+            "lg": "48px",
+            "xl": "80px",
+            "xs": "4px",
+            "md": "24px",
+            "base": "8px",
+            "gutter": "24px"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "display-lg": ["Playfair Display"],
+            "display-lg-mobile": ["Playfair Display"],
+            "headline-md": ["Playfair Display"],
+            "label-sm": ["Inter"],
+            "label-lg": ["Inter"],
+            "headline-lg": ["Playfair Display"],
+            "headline-xl": ["Playfair Display"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "display-lg-mobile": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+            "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+            "label-lg": ["14px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+            "headline-xl": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <!-- Core Design System Custom Styles -->
+  <link href="css/custom.css" rel="stylesheet"/>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden selection:bg-secondary selection:text-white">
+
+  <!-- 1. Shared Navigation Bar -->
+  <nav class="fixed top-0 w-full z-50 bg-surface/80 nav-blur border-b border-outline/10 transition-all duration-300">
+    <div class="flex justify-between items-center px-lg py-md max-w-container-max mx-auto h-20">
+      <a href="index.html" class="font-headline-lg text-2xl font-bold text-primary uppercase tracking-tighter hover:text-secondary transition-colors">
+        Habesha Thread
+      </a>
+      
+      <div class="hidden md:flex items-center gap-xl">
+        <a class="font-label-lg text-primary border-b border-secondary pb-px transition-colors" href="collection.html">Collections</a>
+        <a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="collection.html">Editorial</a>
+        <a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="atelier.html">Atelier Story</a>
+        <a class="font-label-lg text-on-surface-variant hover:text-primary transition-colors" href="atelier.html">Private Bespoke</a>
+      </div>
+      
+      <div class="flex items-center gap-md">
+        <!-- Search Trigger -->
+        <button class="search-trigger hover:text-secondary transition-colors p-1 flex items-center justify-center">
+          <span class="material-symbols-outlined text-[24px] align-middle">search</span>
+        </button>
+        
+        <!-- Cart/Bag Trigger -->
+        <button class="cart-trigger hover:text-secondary transition-colors relative p-1 flex items-center justify-center">
+          <span class="material-symbols-outlined text-[24px] align-middle">shopping_bag</span>
+          <span class="cart-count-badge absolute -top-1 -right-1 bg-primary text-white w-4 h-4 rounded-full text-[10px] flex items-center justify-center font-bold">0</span>
+        </button>
+        
+        <!-- Mobile Menu Trigger -->
+        <button onclick="document.getElementById('mobile-drawer').classList.remove('translate-x-full');" class="md:hidden hover:text-secondary transition-colors">
+          <span class="material-symbols-outlined text-[24px] align-middle">menu</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex justify-end">
+    <div onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full');" class="absolute inset-0 bg-black/40 backdrop-blur-xs"></div>
+    <div class="relative w-72 h-full bg-surface shadow-2xl flex flex-col p-lg justify-start space-y-lg border-l border-outline/10">
+      <div class="flex justify-between items-center pb-md border-b border-outline/10">
+        <span class="font-label-lg uppercase tracking-widest text-[#d4af37]">House Menu</span>
+        <button onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full');" class="hover:text-secondary">
+          <span class="material-symbols-outlined text-[24px]">close</span>
+        </button>
+      </div>
+      <div class="flex flex-col gap-md">
+        <a class="font-headline-md text-xl hover:text-secondary transition-colors" href="index.html">Home</a>
+        <a class="font-headline-md text-xl hover:text-secondary transition-colors" href="collection.html">The Curation</a>
+        <a class="font-headline-md text-xl hover:text-secondary transition-colors" href="atelier.html">Private Atelier</a>
+        <a class="font-headline-md text-xl hover:text-secondary transition-colors" href="atelier.html">Loom Story</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Product Detail Layout -->
+  <main class="pt-32 pb-xl max-w-container-max mx-auto px-md md:px-lg">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-xl lg:items-start">
+      <!-- Immersive Image Gallery (7 Columns) -->
+      <div class="lg:col-span-7 space-y-md">
+        <div class="product-image-container aspect-[3/4] bg-surface-container-low border border-outline/5 relative hover-zoom-container">
+          <img id="main-product-image" alt="The Heritage Modernist Suit - Main View" class="w-full h-full object-cover hover-zoom-img product-image-transition" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOyijPm1Ox0Ibg5LKTnbHYcTNf7rGkQ-1__nNMaTBjXm-ma5FuwFXUKNZO1lmVSHLntOKd0BDTZ_YN6BjaGYbX80xhVn48cvn0f4Pk6g0zzlGmco3YMiFThSBrsWIC8A__qhLuUSsCnglPfx8DqCx6wJFpkppQzKD6zeGVjpKcOSOFNv1Fglw2S6_j4tNDbxCmnSYjDoQEgN28Xzi5G-xDQFi5vXCbP0X47mmoCabXOCBb1FmArX32-5ltn4nMV6irtVLKKME2c3Y"/>
+          <div class="absolute top-md left-md">
+            <span class="bg-[#1a1a1a] text-white px-sm py-xs text-[10px] uppercase font-label-lg tracking-[0.2em] font-bold shadow-md">Limited Atelier Edition</span>
+          </div>
+        </div>
+        
+        <!-- Thumbnail Grid -->
+        <div class="grid grid-cols-2 gap-md">
+          <div onclick="swapProductImage('https://lh3.googleusercontent.com/aida-public/AB6AXuAOyijPm1Ox0Ibg5LKTnbHYcTNf7rGkQ-1__nNMaTBjXm-ma5FuwFXUKNZO1lmVSHLntOKd0BDTZ_YN6BjaGYbX80xhVn48cvn0f4Pk6g0zzlGmco3YMiFThSBrsWIC8A__qhLuUSsCnglPfx8DqCx6wJFpkppQzKD6zeGVjpKcOSOFNv1Fglw2S6_j4tNDbxCmnSYjDoQEgN28Xzi5G-xDQFi5vXCbP0X47mmoCabXOCBb1FmArX32-5ltn4nMV6irtVLKKME2c3Y')" class="product-image-container aspect-[4/5] bg-surface-container-low cursor-pointer border border-outline/10 hover:border-secondary transition-all">
+            <img alt="Detail View 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOyijPm1Ox0Ibg5LKTnbHYcTNf7rGkQ-1__nNMaTBjXm-ma5FuwFXUKNZO1lmVSHLntOKd0BDTZ_YN6BjaGYbX80xhVn48cvn0f4Pk6g0zzlGmco3YMiFThSBrsWIC8A__qhLuUSsCnglPfx8DqCx6wJFpkppQzKD6zeGVjpKcOSOFNv1Fglw2S6_j4tNDbxCmnSYjDoQEgN28Xzi5G-xDQFi5vXCbP0X47mmoCabXOCBb1FmArX32-5ltn4nMV6irtVLKKME2c3Y"/>
+          </div>
+          <div onclick="swapProductImage('https://lh3.googleusercontent.com/aida-public/AB6AXuD7r4L-hRe8rLWr0hLadRlJS1egeUffXFzsUHfRqgKvqhFxenHlGBGqvx4w7LasTNsF97ubmjtjKESQh0MVMf_O3rCDXeZFveYacifIy3PZpXGPqnAcfCwsL5cWJfZsJo6dzdym5MfHymDplo0zIykdPI0JGsoTyECtCyRMHFOz_eQaOnVpfLGnRoa7OJ9aPW-jG6eQ-bUjryTEwYPOVOrfH3KiD8FV3I8JqmVMZn8mRmriyOFtkE18pPCCD5IJ8ru50XMOa2ZBq38')" class="product-image-container aspect-[4/5] bg-surface-container-low cursor-pointer border border-outline/10 hover:border-secondary transition-all">
+            <img alt="Detail View 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7r4L-hRe8rLWr0hLadRlJS1egeUffXFzsUHfRqgKvqhFxenHlGBGqvx4w7LasTNsF97ubmjtjKESQh0MVMf_O3rCDXeZFveYacifIy3PZpXGPqnAcfCwsL5cWJfZsJo6dzdym5MfHymDplo0zIykdPI0JGsoTyECtCyRMHFOz_eQaOnVpfLGnRoa7OJ9aPW-jG6eQ-bUjryTEwYPOVOrfH3KiD8FV3I8JqmVMZn8mRmriyOFtkE18pPCCD5IJ8ru50XMOa2ZBq38"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sophisticated Product Details (5 Columns) -->
+      <div class="lg:col-span-5 lg:sticky lg:top-32 space-y-lg">
+        <nav class="flex items-center gap-xs text-on-surface-variant font-label-sm uppercase tracking-widest text-[10px]">
+          <a class="hover:text-primary transition-colors" href="index.html">House</a>
+          <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+          <a class="hover:text-primary transition-colors" href="collection.html">Suits Edit</a>
+        </nav>
+        
+        <div class="space-y-sm">
+          <h1 class="font-headline-xl text-headline-xl font-bold leading-tight uppercase tracking-tight product-title-transition">The Heritage Modernist Suit</h1>
+          <div class="flex items-baseline gap-sm">
+            <p class="text-headline-md font-headline-md text-secondary tracking-wide text-2xl font-bold">$1,250.00</p>
+            <span class="text-on-surface-variant font-label-sm uppercase tracking-widest text-[10px] bg-surface-container px-sm py-xs">Handcrafted Import Duty Included</span>
+          </div>
+          <p class="text-body-lg text-on-surface-variant leading-relaxed">
+            A flawless masterpiece of structural bespoke tailoring, blending centuries-old Ethiopian Gabi cotton weaving techniques with a sharp, modern Savile Row silhouette.
+          </p>
+        </div>
+
+        <!-- Size Selector -->
+        <div class="space-y-sm">
+          <div class="flex justify-between items-center">
+            <span class="font-label-lg uppercase tracking-wider text-xs font-bold text-primary">Select Size</span>
+            <button onclick="alert('OUR SIZE CHART FOLLOWS STANDARD ITALIAN MENS TAILORING FROM IT 46 TO IT 52.');" class="text-[#d4af37] font-label-sm underline hover:text-black transition-colors text-xs font-bold uppercase tracking-widest">
+              Atelier Size Guide
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-4 gap-base">
+            <button data-size="IT 46" class="size-selector-btn border border-outline-variant py-md font-label-lg hover:border-primary transition-all text-xs font-bold tracking-widest bg-white">IT 46</button>
+            <button data-size="IT 48" class="size-selector-btn border border-primary bg-[#1a1a1a] text-white py-md font-label-lg transition-all text-xs font-bold tracking-widest size-btn-active">IT 48</button>
+            <button data-size="IT 50" class="size-selector-btn border border-outline-variant py-md font-label-lg hover:border-primary transition-all text-xs font-bold tracking-widest bg-white">IT 50</button>
+            <button data-size="IT 52" class="size-selector-btn border border-outline-variant py-md font-label-lg hover:border-primary transition-all text-xs font-bold tracking-widest bg-white">IT 52</button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col gap-md">
+          <button data-product-id="heritage-suit" class="add-to-cart-btn bg-primary text-white py-lg font-label-lg uppercase tracking-[0.2em] hover:bg-secondary hover:text-white transition-all duration-300 font-bold shadow-xl shadow-black/10">
+            ADD TO LUXURY BAG
+          </button>
+          
+          <button onclick="this.classList.toggle('bg-red-50'); showToast('Added Suit to Atelier Wishlist');" class="group border border-outline py-lg font-label-lg uppercase tracking-[0.2em] hover:bg-surface-container transition-all flex items-center justify-center gap-sm text-xs font-bold">
+            <span class="material-symbols-outlined text-secondary group-hover:scale-115 transition-transform">favorite</span>
+            Add to House Wishlist
+          </button>
+        </div>
+
+        <!-- Craftsmanship Details Accordion -->
+        <div class="space-y-lg border-t border-outline-variant pt-lg">
+          <details class="group" open>
+            <summary class="flex justify-between items-center list-none cursor-pointer">
+              <span class="font-label-lg uppercase tracking-widest text-primary text-xs font-bold">Craftsmanship &amp; Fabric</span>
+              <span class="material-symbols-outlined group-open:rotate-180 transition-transform text-secondary">expand_more</span>
+            </summary>
+            <div class="mt-md text-body-md text-on-surface-variant space-y-md leading-relaxed">
+              <p>Hand-woven from 100% organic Ethiopian cotton, the Heritage Modernist represents a seamless dialogue between ancestral techniques and contemporary silhouette.</p>
+              <p>The charcoal base is achieved through artisanal natural dyeing, complemented by gold-thread <span class="text-secondary font-medium italic">Tibeb</span> embroidery.</p>
+              <ul class="grid grid-cols-2 gap-sm pt-base border-t border-outline-variant">
+                <li class="flex items-center gap-sm text-xs font-bold uppercase tracking-wider"><span class="w-2 h-2 bg-secondary"></span> Slim-fit structured</li>
+                <li class="flex items-center gap-sm text-xs font-bold uppercase tracking-wider"><span class="w-2 h-2 bg-secondary"></span> Cotton-silk blend</li>
+                <li class="flex items-center gap-sm text-xs font-bold uppercase tracking-wider"><span class="w-2 h-2 bg-secondary"></span> Gold-thread lapel</li>
+                <li class="flex items-center gap-sm text-xs font-bold uppercase tracking-wider"><span class="w-2 h-2 bg-secondary"></span> Artisanal buttons</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="group border-t border-outline-variant pt-lg">
+            <summary class="flex justify-between items-center list-none cursor-pointer">
+              <span class="font-label-lg uppercase tracking-widest text-primary text-xs font-bold">Sustainability &amp; Origin</span>
+              <span class="material-symbols-outlined group-open:rotate-180 transition-transform text-secondary">expand_more</span>
+            </summary>
+            <div class="mt-md text-body-md text-on-surface-variant leading-relaxed space-y-sm">
+              <p>Ethically produced in our Addis Ababa partner gallery. We ensure fair wages that are 3x the local textile industry standard.</p>
+              <p>Each purchase directly supports local weaving families through the Handloom Weaver's Restoration Guild Initiative.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <!-- Repeating Tibeb Divider -->
+    <div class="my-xl h-4 w-full tibeb-pattern border-y border-outline/10"></div>
+
+    <!-- Complete the Look (Accessories Section) -->
+    <section class="mb-xl">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl">
+        <div>
+          <span class="text-secondary font-label-lg uppercase tracking-[0.3em] mb-xs block text-xs">The Final Accents</span>
+          <h2 class="font-headline-lg text-headline-lg uppercase font-bold tracking-tight">Complete the Look</h2>
+        </div>
+        <div class="h-px flex-grow bg-outline-variant hidden md:block mx-lg mb-4"></div>
+        <a class="font-label-lg uppercase underline hover:text-secondary transition-colors text-xs font-bold tracking-widest" href="collection.html">
+          Shop All Accessories
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+        <!-- Accessory 1: Axum Belt (Primary Focus - Span 8) -->
+        <div class="md:col-span-8 group cursor-pointer overflow-hidden flex flex-col justify-between">
+          <div class="aspect-[16/8] md:aspect-[21/9] bg-surface-container-low overflow-hidden relative border border-outline/5 mb-md hover-zoom-container">
+            <img alt="Tan Axumite Heritage Belt rest on linen" class="w-full h-full object-cover hover-zoom-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHtCntVzkRH3PIKKKBUUiHxLxlhZYHFAUWq3C5yaoC0oJRh8gz8sJgWw7ts69YtuZRo783GY1MzBm7wcmOr-7GH4jv76yDwTWniRBH-L6Uwur8Zwwgq0wWHYD_Kkc2HMHOqZLgQdoS_LYIf0xeJc5BAqC472rFsOxEnznRie4rwnADiuWwzW9Px94Lw0PHQtDdCDwVr6QYVuQ71gBIZVEyuin8FEi0u8J--gD3CM34jcM5L3ueCaqbTzAyhDFZZtSm37FBwCrJg3Y"/>
+            <div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-colors duration-500 flex items-center justify-center">
+              <button data-product-id="axumite-belt-light" class="add-to-cart-btn bg-primary text-white px-lg py-md font-label-lg uppercase tracking-widest font-bold shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                Quick Add • $245
+              </button>
+            </div>
+          </div>
+          <div class="flex justify-between items-start px-base pr-md">
+            <div>
+              <h3 class="font-headline-md text-headline-md font-bold leading-none mb-xs group-hover:text-secondary transition-colors">Axumite Heritage Belt (Tan)</h3>
+              <p class="text-on-surface-variant font-body-md italic text-xs">Hand-crafted tan leather with architectural gold buckle plaque</p>
+            </div>
+            <span class="text-secondary font-headline-md font-bold">$245</span>
+          </div>
+        </div>
+
+        <!-- Smaller Accessories (Span 4) -->
+        <div class="md:col-span-4 flex flex-col gap-lg justify-between">
+          <!-- Empire Loafers -->
+          <div class="group cursor-pointer flex flex-col">
+            <div class="aspect-square bg-surface-container-low overflow-hidden relative border border-outline/5 mb-sm hover-zoom-container">
+              <img alt="Empire Loafers" class="w-full h-full object-cover hover-zoom-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7r4L-hRe8rLWr0hLadRlJS1egeUffXFzsUHfRqgKvqhFxenHlGBGqvx4w7LasTNsF97ubmjtjKESQh0MVMf_O3rCDXeZFveYacifIy3PZpXGPqnAcfCwsL5cWJfZsJo6dzdym5MfHymDplo0zIykdPI0JGsoTyECtCyRMHFOz_eQaOnVpfLGnRoa7OJ9aPW-jG6eQ-bUjryTEwYPOVOrfH3KiD8FV3I8JqmVMZn8mRmriyOFtkE18pPCCD5IJ8ru50XMOa2ZBq38"/>
+              <button data-product-id="empire-loafers" class="add-to-cart-btn absolute top-sm right-sm bg-white p-sm rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity hover:text-[#d4af37]">
+                <span class="material-symbols-outlined text-primary text-[20px] align-middle">shopping_bag</span>
+              </button>
+            </div>
+            <div class="flex justify-between items-center">
+              <h3 class="font-label-lg uppercase tracking-wider text-xs font-bold">Empire Loafers</h3>
+              <span class="text-secondary font-label-lg font-bold">$380</span>
+            </div>
+          </div>
+
+          <!-- Tibeb Pocket Square -->
+          <div class="group cursor-pointer flex flex-col">
+            <div class="aspect-square bg-surface-container-low overflow-hidden relative border border-outline/5 mb-sm hover-zoom-container">
+              <img alt="Tibeb Pocket Square" class="w-full h-full object-cover hover-zoom-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7r4L-hRe8rLWr0hLadRlJS1egeUffXFzsUHfRqgKvqhFxenHlGBGqvx4w7LasTNsF97ubmjtjKESQh0MVMf_O3rCDXeZFveYacifIy3PZpXGPqnAcfCwsL5cWJfZsJo6dzdym5MfHymDplo0zIykdPI0JGsoTyECtCyRMHFOz_eQaOnVpfLGnRoa7OJ9aPW-jG6eQ-bUjryTEwYPOVOrfH3KiD8FV3I8JqmVMZn8mRmriyOFtkE18pPCCD5IJ8ru50XMOa2ZBq38"/>
+              <button data-product-id="tibeb-silk-square" class="add-to-cart-btn absolute top-sm right-sm bg-white p-sm rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity hover:text-[#d4af37]">
+                <span class="material-symbols-outlined text-primary text-[20px] align-middle">shopping_bag</span>
+              </button>
+            </div>
+            <div class="flex justify-between items-center">
+              <h3 class="font-label-lg uppercase tracking-wider text-xs font-bold">Tibeb Silk Square</h3>
+              <span class="text-secondary font-label-lg font-bold">$85</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 3. Premium Footer -->
+  <footer class="bg-primary text-on-primary border-t border-outline">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-xl px-lg py-xl max-w-container-max mx-auto">
+      <div class="space-y-md">
+        <h2 class="font-headline-lg text-headline-lg text-on-primary tracking-tighter uppercase font-bold">Habesha Thread</h2>
+        <p class="font-body-md text-on-primary-container leading-relaxed">Modern Heritage. A high-end celebration of Ethiopian craftsmanship through the lens of tailored contemporary gents style.</p>
+        <div class="flex gap-md mt-lg">
+          <a class="opacity-70 hover:opacity-100 transition-all text-white" href="#"><span class="material-symbols-outlined">public</span></a>
+          <a class="opacity-70 hover:opacity-100 transition-all text-white" href="#"><span class="material-symbols-outlined">share</span></a>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-md">
+        <div class="flex flex-col gap-sm">
+          <span class="font-label-lg uppercase tracking-widest text-[#d4af37] mb-xs text-xs font-bold">Brand</span>
+          <a class="text-on-primary-container font-body-md hover:text-on-primary hover:underline transition-all" href="atelier.html">Brand Story</a>
+          <a class="text-on-primary-container font-body-md hover:text-on-primary hover:underline transition-all" href="atelier.html">Bespoke Looming</a>
+          <a class="text-on-primary-container font-body-md hover:text-on-primary hover:underline transition-all" href="collection.html">All Suits</a>
+        </div>
+        <div class="flex flex-col gap-sm">
+          <span class="font-label-lg uppercase tracking-widest text-[#d4af37] mb-xs text-xs font-bold">Services</span>
+          <a class="text-on-primary-container font-body-md hover:text-on-primary hover:underline transition-all" href="#">Contact House</a>
+          <a class="text-on-primary-container font-body-md hover:text-on-primary hover:underline transition-all" href="#">Shipping &amp; Customs</a>
+        </div>
+      </div>
+      <div class="space-y-md">
+        <span class="font-label-lg uppercase tracking-widest text-[#d4af37] text-xs font-bold">Newsletter</span>
+        <p class="font-body-md text-on-primary-container">Exclusive access to new bespoke drops.</p>
+        <form onsubmit="event.preventDefault(); alert('Subscribed to Newsletter!');" class="flex border-b border-on-primary-container/30 pb-xs focus-within:border-secondary transition-colors">
+          <input class="bg-transparent border-none text-on-primary placeholder-on-primary-container/50 focus:ring-0 w-full font-body-md py-xs focus:outline-none" placeholder="Email Address" type="email" required/>
+          <button class="material-symbols-outlined text-[#d4af37]" type="submit">arrow_forward</button>
+        </form>
+      </div>
+    </div>
+    <div class="max-w-container-max mx-auto px-lg py-md border-t border-on-primary-container/10 text-center">
+      <p class="font-label-sm text-on-primary-container/40 text-[11px]">© 2026 Habesha Thread. Modern Heritage. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Application Logic JS Load -->
+  <script src="js/main.js"></script>
+
+  <!-- Local swap gallery scripts -->
+  <script>
+    function swapProductImage(imgUrl) {
+      const mainImg = document.getElementById("main-product-image");
+      if (mainImg) {
+        mainImg.style.opacity = "0";
+        setTimeout(() => {
+          mainImg.src = imgUrl;
+          mainImg.style.opacity = "1";
+        }, 150);
+      }
+    }
+  </script>
+</body>
+</html>
