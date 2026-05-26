@@ -42,7 +42,8 @@ async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const url = req.url;
+  // Extract path without query string
+  const url = req.url.split('?')[0];
 
   try {
     // AUTH ENDPOINTS
@@ -302,7 +303,7 @@ async function handler(req, res) {
         return res.status(403).json({ error: 'Admin access required' });
       }
 
-      const urlObj = new URL(req.url, 'http://localhost');
+      const urlObj = new URL(`http://localhost${req.url}`);
       const status = urlObj.searchParams.get('status');
       const participation = urlObj.searchParams.get('participation');
       const registration_type = urlObj.searchParams.get('registration_type');
@@ -416,7 +417,7 @@ async function handler(req, res) {
         return res.status(403).json({ error: 'Admin access required' });
       }
 
-      const urlObj = new URL(req.url, 'http://localhost');
+      const urlObj = new URL(`http://localhost${req.url}`);
       const status = urlObj.searchParams.get('status');
 
       let query = supabase
@@ -600,7 +601,7 @@ async function handler(req, res) {
         return res.status(403).json({ error: 'Admin access required' });
       }
 
-      const urlObj = new URL(req.url, 'http://localhost');
+      const urlObj = new URL(`http://localhost${req.url}`);
       const status = urlObj.searchParams.get('status');
       const priority = urlObj.searchParams.get('priority');
 
