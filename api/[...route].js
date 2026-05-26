@@ -42,8 +42,10 @@ async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // Extract path without query string
-  const url = req.url.split('?')[0];
+  // Vercel strips the /api prefix from req.url in catch-all routes,
+  // so normalize to always start with /api for consistent matching
+  const rawPath = req.url.split('?')[0];
+  const url = rawPath.startsWith('/api') ? rawPath : '/api' + rawPath;
 
   try {
     // AUTH ENDPOINTS
